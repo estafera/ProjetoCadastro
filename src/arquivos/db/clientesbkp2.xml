@@ -1,0 +1,51 @@
+<Cliente-array>
+  <Cliente>
+    <cod>0</cod>
+    <nome>Ramon Honorio</nome>
+    <cpf>12345678900</cpf>
+    <telefone>1166123552</telefone>
+    <cidade>São Paulo/SP</cidade>
+    <endereco>Rua qualquer, 86</endereco>
+    <email>ramonaqh@gmail.com</email>
+    <programa>Jogo</programa>
+    <plataforma>Outra</plataforma>
+    <descricao>Descrição do jogo qualquer de desktop.</descricao>
+  </Cliente>
+  <Cliente>
+    <cod>1</cod>
+    <nome>Sakata Gintoki</nome>
+    <cpf>98765432100</cpf>
+    <telefone>948461262</telefone>
+    <cidade>Edo</cidade>
+    <endereco>Distrito Kabuki, 264</endereco>
+    <email>yorozuyaGintoki@gmail.com</email>
+    <programa>Site</programa>
+    <plataforma>Web</plataforma>
+    <descricao>Descrição do site qualquer.</descricao>
+  </Cliente>
+  <Cliente>
+    <cod>2</cod>
+    <nome>Ronaldo</nome>
+    <cpf>1655649835</cpf>
+    <telefone>98498491</telefone>
+    <cidade>São Paulo/SP</cidade>
+    <endereco>Aleixo G</endereco>
+    <email>scalleinfo@gmail.com</email>
+    <programa>GPS (app)</programa>
+    <plataforma>Mobile</plataforma>
+    <descricao>Um aplicativo gps para celular.</descricao>
+  </Cliente>
+  <Cliente>
+    <cod>3</cod>
+    <nome>Ednete</nome>
+    <cpf>1655649835</cpf>
+    <telefone>98498491</telefone>
+    <cidade>São Paulo/SP</cidade>
+    <endereco>Aleixo G</endereco>
+    <email>ednetea@yahoo.com</email>
+    <programa>Panificadora</programa>
+    <plataforma>Outra</plataforma>
+    <descricao>Programar as funções de uma máquina de pão.</descricao>
+  </Cliente>
+  <null/>
+</Cliente-array>
