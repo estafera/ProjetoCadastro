@@ -11,6 +11,5 @@ package parser;
  * @author RamonH
  */
 public class Cadastros {
-    public int proximo = 0;
-    //public int posicao = 0;
+    public int proximo;
 }

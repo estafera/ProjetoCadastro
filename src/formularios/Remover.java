@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import parser.Cadastros;
 import parser.Cliente;
 import parser.XML;
@@ -16,33 +17,28 @@ import parser.XML;
 public class Remover extends javax.swing.JFrame {
 //<editor-fold defaultstate="collapsed" desc="INFORMAÇÕES DO CLIENTE">
     /*  
-        0 - codigo do cliente
-        1 - nome completo
-        2 - cpf
-        3 - telefone
-        4 - cidade/estado
-        5 - endereço
-        6 - email
-        7 - nome do programa
-        8 - plataforma
-        9 - descrição
-    */
+     0 - codigo do cliente
+     1 - nome completo
+     2 - cpf
+     3 - telefone
+     4 - cidade/estado
+     5 - endereço
+     6 - email
+     7 - nome do programa
+     8 - plataforma
+     9 - descrição
+     */
 //</editor-fold>
+
     int qtdClientes = 0, atual = 0;
+    boolean matrizVazia = false;
     Cliente[] cliente;
     Cadastros cadastro = new Cadastros();
     String destino = "./src/arquivos/db/";
     XML xml = new XML(destino);
-    
+
     //<editor-fold defaultstate="collapsed" desc="método construtor Remover()">
     public Remover() {
-        /*initComponents();
-        try {
-            leituraInicial();
-        } catch(FileNotFoundException e){
-            System.out.println("Arquivo não encontrado "+e);
-        }
-        preencherCampos();*/
         inicializar();
     }
 //</editor-fold>
@@ -307,7 +303,7 @@ public class Remover extends javax.swing.JFrame {
     private void botaoVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoVoltarActionPerformed
         // TODO add your handling code here:
         //System.exit(0);
-        cadastro.proximo=0;
+        cadastro.proximo = 0;
         dispose();
     }//GEN-LAST:event_botaoVoltarActionPerformed
 
@@ -331,82 +327,91 @@ public class Remover extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(Remover.class.getName()).log(Level.SEVERE, null, ex);
         }
-        inicializar();
+        dispose();
+
     }//GEN-LAST:event_botaoRemoverActionPerformed
 
     //<editor-fold defaultstate="collapsed" desc="remover()">
-    void remover(){
+    void remover() {
+//<editor-fold defaultstate="collapsed" desc="rascunhos">
         //Cliente[] novaMatriz = new Cliente[cadastro.posicao-1];
-        
+
         //cadastro.posicao--;
         //System.out.println("Qtd: "+cadastro.proximo);
-        
+//</editor-fold>
         for (int i = atual; i < cadastro.proximo; i++) {
-            int j = i+1;
+            int j = i + 1;
             //System.out.println("> i atual: "+i+"\nj: "+j);
             cliente[i] = cliente[j];
             cliente[i].cod--;
         }
-        
+
         cliente[cadastro.proximo] = null;
-        atual = cadastro.proximo-1;
-        
+        atual = cadastro.proximo - 1;
+
+//<editor-fold defaultstate="collapsed" desc="rascunhos">
         /*
-        try {
-            xml.salvarCadastros(cadastro);
-        } catch (IOException ex) {
-            Logger.getLogger(Remover.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
-        
-        
+         try {
+         xml.salvarCadastros(cadastro);
+         } catch (IOException ex) {
+         Logger.getLogger(Remover.class.getName()).log(Level.SEVERE, null, ex);
+         }*/
+//</editor-fold>
+        JOptionPane.showMessageDialog(this, "Cliente (cod " + atual + ") removido.");
     }
 //</editor-fold>
-    
+
     //<editor-fold defaultstate="collapsed" desc="ultimoCliente()">
-    Cliente ultimoCliente(Cliente[] c){
+    Cliente ultimoCliente(Cliente[] c) {
         int ultimo = 0;
-        
+
         for (int i = 0; i < c.length; i++) {
-            if(c[i]==null){
-                if(i!=0) ultimo = i-1;
+            if (c[i] == null) {
+                if (i != 0) {
+                    ultimo = i - 1;
+                }
                 break;
             }
         }
-        if(ultimo==0){
-            ultimo = c.length-1;
-        }
+
         return c[ultimo];
     }
 //</editor-fold>
-    
+
     //<editor-fold defaultstate="collapsed" desc="leituraInicial()">
-    void leituraInicial() throws FileNotFoundException{
+    void leituraInicial() throws FileNotFoundException {
         cliente = xml.lerClientes();
-        cadastro.proximo = ultimoCliente(cliente).cod;
         
-        System.out.println("> Cadastro qtd: "+cadastro.proximo);
-        System.out.println("> Atual: "+atual);
-        qtdClientes = ultimoCliente(cliente).cod;
+        if (haClientes()) {
+            cadastro.proximo = ultimoCliente(cliente).cod;
+            qtdClientes = ultimoCliente(cliente).cod;
+        } else {
+            JOptionPane.showMessageDialog(this, "Não há clientes cadastrados.", "Erro!", JOptionPane.ERROR_MESSAGE);
+        }
+        
     }
 //</editor-fold>
-    
+
     //<editor-fold defaultstate="collapsed" desc="inicializar()">
-    public void inicializar(){
-        initComponents();        
+    public void inicializar() {
         try {
             leituraInicial();
-        } catch(FileNotFoundException e){
-            System.out.println(">> Arquivo não encontrado "+e);
+            preencherCampos();
+            initComponents();
+        } catch (FileNotFoundException e) {
+            System.out.println(">> Arquivo não encontrado " + e);
+        } catch (NullPointerException e){
+            System.out.println(">> Não há clientes cadastrados.");
         }
-        preencherCampos();
+        
     }
 //</editor-fold>
-    
+
     //<editor-fold defaultstate="collapsed" desc="preencherCampos()">
     void preencherCampos(){
         //txtCadastros.setText(String.valueOf(qtdClientes+1));
-        txtCadastros.setText(String.valueOf(cadastro.proximo+1));
-        
+        txtCadastros.setText(String.valueOf(cadastro.proximo + 1));
+
         //*********
         txtCod.setText(String.valueOf(cliente[atual].cod));
         txtNome.setText(cliente[atual].nome);
@@ -421,9 +426,17 @@ public class Remover extends javax.swing.JFrame {
     }
 //</editor-fold>
     
+    public boolean haClientes(){
+        if(cliente[0]!=null){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     //<editor-fold defaultstate="collapsed" desc="proximo()">
-    void proximo(){
-        if(atual<qtdClientes){
+    void proximo() {
+        if (atual < qtdClientes) {
             ++atual;
         } else {
             atual = 0;
@@ -431,10 +444,10 @@ public class Remover extends javax.swing.JFrame {
         //System.out.println("> Atual: "+atual);
     }
 //</editor-fold>
-    
+
     //<editor-fold defaultstate="collapsed" desc="anterior()">
-    void anterior(){
-        if(atual>0){
+    void anterior() {
+        if (atual > 0) {
             --atual;
         } else {
             atual = qtdClientes;
@@ -442,14 +455,14 @@ public class Remover extends javax.swing.JFrame {
         //System.out.println("> Atual: "+atual);
     }
 //</editor-fold>
-    
+
     //<editor-fold defaultstate="collapsed" desc="Método Main()">
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-        * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-        */
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -467,7 +480,7 @@ public class Remover extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Remover.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

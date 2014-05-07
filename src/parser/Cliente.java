@@ -8,10 +8,11 @@ package parser;
 
 import java.io.Serializable;
 
-/**
- *
- * @author RamonH
+//<editor-fold defaultstate="collapsed" desc="Desenvolvedores">
+/*
+ * @authors Ramon Honorio, Maikon Evangelista, João Paulo Silva
  */
+//</editor-fold>
 public class Cliente {
     public int cod; // -- Código do cliente
     

@@ -16,10 +16,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-/**
- *
- * @author RamonH
+//<editor-fold defaultstate="collapsed" desc="Desenvolvedores">
+/*
+ * @authors Ramon Honorio, Maikon Evangelista, João Paulo Silva
  */
+//</editor-fold>
 public class XML {
     
     XStream parser = new XStream(new DomDriver());
@@ -27,21 +28,17 @@ public class XML {
     InputStream arqEntrada = null;
     
     public String destino; // = "./arquivos/clientes.xml";
-    public String nomeArqClientes = "clientes_1.xml";
-    public String nomeArqCadastros = "cadastros.xml";
+    public String nomeArqClientes = "clientes.xml";
     File arquivoClientes, arquivoCadastros;
     
-    Cadastros c = new Cadastros();
     
     public XML(String destinoDoArquivo){
         
         destino = destinoDoArquivo;
         arquivoClientes = new File(destino+nomeArqClientes);
-        arquivoCadastros = new File(destino+nomeArqCadastros);
         
         parser.setMode(XStream.NO_REFERENCES);
         parser.alias("Cliente", Cliente.class);
-        parser.alias("Cadastros", Cadastros.class);
     }
     
     public Cliente[] criarClientesTeste(){

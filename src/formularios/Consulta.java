@@ -1,6 +1,7 @@
 package formularios;
 
 import java.io.FileNotFoundException;
+import javax.swing.JOptionPane;
 import parser.Cadastros;
 import parser.Cliente;
 import parser.XML;
@@ -333,41 +334,47 @@ public class Consulta extends javax.swing.JFrame {
     //<editor-fold defaultstate="collapsed" desc="leituraInicial()">
     void leituraInicial() throws FileNotFoundException{
         cliente = xml.lerClientes();
-        cadastros.proximo = ultimoCliente(cliente).cod;
-        qtdClientes = cadastros.proximo;
-        
-        //<editor-fold defaultstate="collapsed" desc="rascunhos">
-        //cad = xml.lerCadastros();
-        
-        //qtdClientes = cliente.length;
-        /*
-        for (int i = 0; i <= cadastros.proximo; i++) {
-        try {
-        if(cliente[i]!=null){
-        qtdClientes = i;
+        if(haClientes()){
+            cadastros.proximo = ultimoCliente(cliente).cod;
+            qtdClientes = cadastros.proximo;
+
+            //<editor-fold defaultstate="collapsed" desc="rascunhos">
+            //cad = xml.lerCadastros();
+
+            //qtdClientes = cliente.length;
+            /*
+            for (int i = 0; i <= cadastros.proximo; i++) {
+            try {
+            if(cliente[i]!=null){
+            qtdClientes = i;
+            }
+            } catch (NullPointerException e) {
+            System.out.println("Cliente com valor nulo - leituraInicial()");
+            } catch (ArrayIndexOutOfBoundsException x){
+            //System.out.println("Index do array é uma posicao inexistente - leiturainicial()");
+            }
+            }*/
+    //</editor-fold>
+
+            System.out.println("> Dados de clientes carregados com sucesso." );
+        } else {
+            JOptionPane.showMessageDialog(this, "Não há clientes cadastrados.", "Erro!", JOptionPane.ERROR_MESSAGE);
         }
-        } catch (NullPointerException e) {
-        System.out.println("Cliente com valor nulo - leituraInicial()");
-        } catch (ArrayIndexOutOfBoundsException x){
-        //System.out.println("Index do array é uma posicao inexistente - leiturainicial()");
-        }
-        }*/
-//</editor-fold>
-        
-        System.out.println("> Dados de clientes carregados com sucesso." );
     }
 //</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc="inicializar()">
     public void inicializar(){
-        initComponents();
         try {
             leituraInicial();
+            initComponents();
+            preencherCampos();
+            cadastros.proximo=0;
         } catch(FileNotFoundException e){
             System.out.println("Arquivo não encontrado "+e);
+        } catch (NullPointerException e){
+            System.out.println(">> Não há clientes cadastrados.");
         }
-        cadastros.proximo=0;
-        preencherCampos();
     }
 //</editor-fold>
     
@@ -459,12 +466,18 @@ public class Consulta extends javax.swing.JFrame {
                 break;
             }
         }
-        if(ultimo==0){
-            ultimo = c.length-1;
-        }
+        
         return c[ultimo];
     }
 //</editor-fold>
+    
+    public boolean haClientes(){
+        if(cliente[0]!=null){
+            return true;
+        } else {
+            return false;
+        }
+    }
     
     //<editor-fold defaultstate="collapsed" desc="Método Main()">
     public static void main(String args[]) {

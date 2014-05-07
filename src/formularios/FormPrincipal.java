@@ -32,23 +32,24 @@ public class FormPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        botaoAdd = new javax.swing.JButton();
+        botaoCadastro = new javax.swing.JButton();
         botaoRem = new javax.swing.JButton();
         botaoConsulta = new javax.swing.JButton();
         botaoEdit = new javax.swing.JButton();
-        lblAdd = new javax.swing.JLabel();
+        lblCadastro = new javax.swing.JLabel();
         lblRem = new javax.swing.JLabel();
         lblEdit = new javax.swing.JLabel();
         lblConsultar = new javax.swing.JLabel();
         lblTitulo = new javax.swing.JLabel();
+        lblTitulo1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Projeto Integrador");
 
-        botaoAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arquivos/icones/add.png"))); // NOI18N
-        botaoAdd.addActionListener(new java.awt.event.ActionListener() {
+        botaoCadastro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arquivos/icones/add.png"))); // NOI18N
+        botaoCadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoAddActionPerformed(evt);
+                botaoCadastroActionPerformed(evt);
             }
         });
 
@@ -73,9 +74,9 @@ public class FormPrincipal extends javax.swing.JFrame {
             }
         });
 
-        lblAdd.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblAdd.setText("Cadastrar");
-        lblAdd.setPreferredSize(null);
+        lblCadastro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCadastro.setText("Cadastrar");
+        lblCadastro.setPreferredSize(null);
 
         lblRem.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblRem.setText("Remover");
@@ -89,21 +90,25 @@ public class FormPrincipal extends javax.swing.JFrame {
         lblConsultar.setText("Consultar");
         lblConsultar.setPreferredSize(null);
 
-        lblTitulo.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
-        lblTitulo.setText("Cadastro de Clientes");
+        lblTitulo.setFont(new java.awt.Font("Tahoma", 0, 72)); // NOI18N
+        lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitulo.setText("de Clientes");
+
+        lblTitulo1.setFont(new java.awt.Font("Tahoma", 0, 72)); // NOI18N
+        lblTitulo1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitulo1.setText("Cadastro");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(lblAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(botaoAdd))
+                            .addComponent(lblCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(botaoCadastro))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(botaoRem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -115,18 +120,27 @@ public class FormPrincipal extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(botaoConsulta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                            .addComponent(lblConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(55, 55, 55)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblTitulo1, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblTitulo))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {lblTitulo, lblTitulo1});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(28, 28, 28)
+                .addComponent(lblTitulo1)
+                .addGap(1, 1, 1)
+                .addComponent(lblTitulo)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblRem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblConsultar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -135,35 +149,60 @@ public class FormPrincipal extends javax.swing.JFrame {
                     .addComponent(botaoConsulta)
                     .addComponent(botaoEdit)
                     .addComponent(botaoRem)
-                    .addComponent(botaoAdd))
+                    .addComponent(botaoCadastro))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void botaoAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAddActionPerformed
-        cadastro = new Cadastro();
-        cadastro.setVisible(true);
-    }//GEN-LAST:event_botaoAddActionPerformed
+    private void botaoCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCadastroActionPerformed
+        criarCadastro();
+    }//GEN-LAST:event_botaoCadastroActionPerformed
 
     private void botaoRemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoRemActionPerformed
         // TODO add your handling code here:
-        remover = new Remover();
-        remover.setVisible(true);
+        criarRemover();
     }//GEN-LAST:event_botaoRemActionPerformed
 
     private void botaoEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEditActionPerformed
         // TODO add your handling code here:
-        editar = new Editar();
-        editar.setVisible(true);
+        criarEditar();
     }//GEN-LAST:event_botaoEditActionPerformed
 
     private void botaoConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoConsultaActionPerformed
         // TODO add your handling code here:
-        consulta = new Consulta();
-        consulta.setVisible(true);
+        criarConsulta();
     }//GEN-LAST:event_botaoConsultaActionPerformed
+    
+    public void criarConsulta(){
+        consulta = new Consulta();
+        if(consulta.haClientes())
+            consulta.setVisible(true);
+        else
+            consulta = null;
+    }
+    
+    public void criarEditar(){
+        editar = new Editar();
+        if(editar.haClientes())
+            editar.setVisible(true);
+        else
+            editar = null;
+    }
+    
+    public void criarRemover(){
+        remover = new Remover();
+        if(remover.haClientes())
+            remover.setVisible(true);
+        else
+            remover = null;
+    }
+    
+    public void criarCadastro(){
+        cadastro = new Cadastro();
+        cadastro.setVisible(true);
+    }
     
     //<editor-fold defaultstate="collapsed" desc="Método Main()">
     public static void main(String args[]) {
@@ -200,14 +239,15 @@ public class FormPrincipal extends javax.swing.JFrame {
 //</editor-fold>
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botaoAdd;
+    private javax.swing.JButton botaoCadastro;
     private javax.swing.JButton botaoConsulta;
     private javax.swing.JButton botaoEdit;
     private javax.swing.JButton botaoRem;
-    private javax.swing.JLabel lblAdd;
+    private javax.swing.JLabel lblCadastro;
     private javax.swing.JLabel lblConsultar;
     private javax.swing.JLabel lblEdit;
     private javax.swing.JLabel lblRem;
     private javax.swing.JLabel lblTitulo;
+    private javax.swing.JLabel lblTitulo1;
     // End of variables declaration//GEN-END:variables
 }

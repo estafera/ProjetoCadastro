@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import parser.Cadastros;
 import parser.Cliente;
 import parser.XML;
@@ -163,13 +164,17 @@ public class Editar extends javax.swing.JFrame {
             }
         });
 
+        bGrupoPlataforma.add(radioWeb);
         radioWeb.setSelected(true);
         radioWeb.setText("Web");
 
+        bGrupoPlataforma.add(radioDesk);
         radioDesk.setText("Desktop");
 
+        bGrupoPlataforma.add(radioMobile);
         radioMobile.setText("Mobile");
 
+        bGrupoPlataforma.add(radioOutra);
         radioOutra.setText("Outra");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -344,35 +349,41 @@ public class Editar extends javax.swing.JFrame {
     void leituraInicial() throws FileNotFoundException{
         cliente = xml.lerClientes();
         //System.out.println(cliente.length);
-        cadastros.proximo = ultimoCliente(cliente).cod;
-        //cad = xml.lerCadastros();
         
-        //qtdClientes = cliente.length;
-        
-        for (int i = 0; i <= cadastros.proximo; i++) {
-            try {
-                if(cliente[i]!=null){
-                    qtdClientes = i;
-                }
-            } catch (NullPointerException e) {
-                System.out.println("Cliente com valor nulo - leituraInicial()");
-            } catch (ArrayIndexOutOfBoundsException x){
-                //System.out.println("Index do array é uma posicao inexistente - leiturainicial()");
+        if(haClientes()){
+            cadastros.proximo = ultimoCliente(cliente).cod;
+//<editor-fold defaultstate="collapsed" desc="rascunhos">
+            //cad = xml.lerCadastros();
+            //qtdClientes = cliente.length;
+//</editor-fold>
+            for (int i = 0; i <= cadastros.proximo; i++) {
+                try {
+                    if(cliente[i]!=null){
+                        qtdClientes = i;
+                    }
+                } catch (NullPointerException e) {
+                    System.out.println("Cliente com valor nulo - leituraInicial()");
+                } catch (ArrayIndexOutOfBoundsException x){}
             }
+        } else {
+            JOptionPane.showMessageDialog(this, "Não há clientes cadastrados.", "Erro!", JOptionPane.ERROR_MESSAGE);
         }
+        
     }
 //</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc="inicializar()">
     public void inicializar(){
-        initComponents();
         try {
             leituraInicial();
+            initComponents();
+            cadastros.proximo=0;
+            preencherCampos();
         } catch(FileNotFoundException e){
             System.out.println("Arquivo não encontrado "+e);
+        } catch (NullPointerException e){
+            System.out.println(">> Não há clientes cadastrados.");
         }
-        cadastros.proximo=0;
-        preencherCampos();
     }
 //</editor-fold>
     
@@ -390,7 +401,7 @@ public class Editar extends javax.swing.JFrame {
         //txtPlataforma.setText(cliente[atual].plataforma);
         txtDescricao.setText(cliente[atual].descricao);
         
-        resetarBotoes();
+        //resetarBotoes();
         selecBotaoPlataforma(cliente[atual].plataforma);
         
     }
@@ -413,24 +424,24 @@ public class Editar extends javax.swing.JFrame {
     void selecBotaoPlataforma(String p){
         switch(p){
             case "Web":
-                radioWeb.setEnabled(true);
+                //radioWeb.setEnabled(true);
                 radioWeb.setSelected(true);
                 break;
             case "Desktop":
-                radioDesk.setEnabled(true);
+                //radioDesk.setEnabled(true);
                 radioDesk.setSelected(true);
                 break;
             case "Mobile":
-                radioMobile.setEnabled(true);
+                //radioMobile.setEnabled(true);
                 radioMobile.setSelected(true);
                 break;
             case "Outra":
-                radioOutra.setEnabled(true);
+                //radioOutra.setEnabled(true);
                 radioOutra.setSelected(true);
                 break;
         }
     }
-//</editor-fold>
+//</editor-fold>*/
     
     //<editor-fold defaultstate="collapsed" desc="proximo()">
     void proximo(){
@@ -464,9 +475,6 @@ public class Editar extends javax.swing.JFrame {
                 break;
             }
         }
-        if(ultimo==0){
-            ultimo = c.length-1;
-        }
         return c[ultimo];
     }
 //</editor-fold>
@@ -498,6 +506,14 @@ public class Editar extends javax.swing.JFrame {
         System.out.println("> Alterações do cliente "+(atual)+" feitas com sucesso.");
     }
 //</editor-fold>
+    
+    public boolean haClientes(){
+        if(cliente[0]!=null){
+            return true;
+        } else {
+            return false;
+        }
+    }
     
     //<editor-fold defaultstate="collapsed" desc="Método Main()">
     public static void main(String args[]) {

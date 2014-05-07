@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import parser.Cadastros;
 import parser.Cliente;
 import parser.XML;
@@ -435,29 +436,33 @@ public class Cadastro extends javax.swing.JFrame {
     
     //<editor-fold defaultstate="collapsed" desc="leituraInicial()">
     void leituraInicial() throws FileNotFoundException{
-        
         cliente = xml.lerClientes();
         espacoMatriz = cliente.length;
-        //System.out.println(">> Valor de espacoMatriz: "+espacoMatriz);
-        cadastros.proximo = ultimoCliente(cliente).cod+1;
-        //cadastros = xml.lerCadastros();
-        
-        System.out.println("> Dados de clientes carregados com sucesso." 
-                //+ "\n>>>> ultimoCliente(cliente).cod="+ultimoCliente(cliente).cod
-                //+ "\n>>>> cadastros.proximo: "+cadastros.proximo
-        );
-        
+        if(haClientes()) {
+            cadastros.proximo = ultimoCliente(cliente).cod+1;
+
+            System.out.println("> Dados de clientes carregados com sucesso." 
+    //<editor-fold defaultstate="collapsed" desc="rascunhos">
+                    //+ "\n>>>> ultimoCliente(cliente).cod="+ultimoCliente(cliente).cod
+                    //+ "\n>>>> cadastros.proximo: "+cadastros.proximo
+    //</editor-fold>
+            );
+        }  else {
+            cadastros.proximo = 0;
+        }
     }
 //</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc="inicializar()">
     public void inicializar(){
-        initComponents();
-        limparCampos();
         try{
             leituraInicial();
+            initComponents();
+            limparCampos();
         } catch (FileNotFoundException e) {
-            System.out.println("Arquivo não encontrado: "+e);
+            System.out.println(">> Arquivo não encontrado: "+e);
+        } catch (NullPointerException e){
+            System.out.println(">> Não há clientes cadastrados.");
         }
     }
 //</editor-fold>
@@ -465,19 +470,23 @@ public class Cadastro extends javax.swing.JFrame {
     //<editor-fold defaultstate="collapsed" desc="ultimoCliente()">
     Cliente ultimoCliente(Cliente[] c){
         int ultimo = 0;
-        
         for (int i = 0; i < c.length; i++) {
             if(c[i]==null){
                 if(i!=0) ultimo = i-1;
                 break;
             }
-        }
-        if(ultimo==0){
-            ultimo = c.length-1;
-        }
+        }        
         return c[ultimo];
     }
 //</editor-fold>
+    
+    public boolean haClientes(){
+        if(cliente[0]!=null){
+            return true;
+        } else {
+            return false;
+        }
+    }
     
     //<editor-fold defaultstate="collapsed" desc="[rascunhos] FUNÇÕES ANTIGAS">
     // === FUNÇÕES ANTIGAS == //
