@@ -15,22 +15,7 @@ import parser.XML;
  */
 //</editor-fold>
 public class Remover extends javax.swing.JFrame {
-//<editor-fold defaultstate="collapsed" desc="INFORMAÇÕES DO CLIENTE">
-    /*  
-     0 - codigo do cliente
-     1 - nome completo
-     2 - cpf
-     3 - telefone
-     4 - cidade/estado
-     5 - endereço
-     6 - email
-     7 - nome do programa
-     8 - plataforma
-     9 - descrição
-     */
-//</editor-fold>
-
-    int qtdClientes = 0, atual = 0;
+    int ultimo = 0, atual = 0;
     boolean matrizVazia = false;
     Cliente[] cliente;
     Cadastros cadastro = new Cadastros();
@@ -141,7 +126,6 @@ public class Remover extends javax.swing.JFrame {
 
         txtCadastros.setEditable(false);
         txtCadastros.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtCadastros.setFocusable(false);
         txtCadastros.setRequestFocusEnabled(false);
 
         botaoProximo.setText("Próximo >");
@@ -185,7 +169,7 @@ public class Remover extends javax.swing.JFrame {
                         .addComponent(labelClientesCad)
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(txtCadastros, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(203, 203, 203))
+                        .addGap(150, 150, 150))
                     .addComponent(jSeparator1)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -303,7 +287,7 @@ public class Remover extends javax.swing.JFrame {
     private void botaoVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoVoltarActionPerformed
         // TODO add your handling code here:
         //System.exit(0);
-        cadastro.proximo = 0;
+        //cadastro.proximo = 0;
         dispose();
     }//GEN-LAST:event_botaoVoltarActionPerformed
 
@@ -324,6 +308,7 @@ public class Remover extends javax.swing.JFrame {
         remover();
         try {
             xml.salvarClientes(cliente);
+            JOptionPane.showMessageDialog(this, "Cliente removido.");
         } catch (IOException ex) {
             Logger.getLogger(Remover.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -339,15 +324,15 @@ public class Remover extends javax.swing.JFrame {
         //cadastro.posicao--;
         //System.out.println("Qtd: "+cadastro.proximo);
 //</editor-fold>
-        for (int i = atual; i < cadastro.proximo; i++) {
+        for (int i = atual; i < ultimo; i++) {
             int j = i + 1;
             //System.out.println("> i atual: "+i+"\nj: "+j);
             cliente[i] = cliente[j];
             cliente[i].cod--;
         }
 
-        cliente[cadastro.proximo] = null;
-        atual = cadastro.proximo - 1;
+        cliente[ultimo] = null;
+        atual = ultimo - 1;
 
 //<editor-fold defaultstate="collapsed" desc="rascunhos">
         /*
@@ -357,7 +342,6 @@ public class Remover extends javax.swing.JFrame {
          Logger.getLogger(Remover.class.getName()).log(Level.SEVERE, null, ex);
          }*/
 //</editor-fold>
-        JOptionPane.showMessageDialog(this, "Cliente (cod " + atual + ") removido.");
     }
 //</editor-fold>
 
@@ -373,6 +357,7 @@ public class Remover extends javax.swing.JFrame {
                 break;
             }
         }
+        
 
         return c[ultimo];
     }
@@ -383,8 +368,8 @@ public class Remover extends javax.swing.JFrame {
         cliente = xml.lerClientes();
         
         if (haClientes()) {
-            cadastro.proximo = ultimoCliente(cliente).cod;
-            qtdClientes = ultimoCliente(cliente).cod;
+            ultimo = ultimoCliente(cliente).cod;
+            atual = 0;
         } else {
             JOptionPane.showMessageDialog(this, "Não há clientes cadastrados.", "Erro!", JOptionPane.ERROR_MESSAGE);
         }
@@ -394,12 +379,13 @@ public class Remover extends javax.swing.JFrame {
 
     //<editor-fold defaultstate="collapsed" desc="inicializar()">
     public void inicializar() {
+        
         try {
             leituraInicial();
-            preencherCampos();
             initComponents();
+            preencherCampos();
         } catch (FileNotFoundException e) {
-            System.out.println(">> Arquivo não encontrado " + e);
+            System.out.println(">> Arquivo não encontrado. " + e);
         } catch (NullPointerException e){
             System.out.println(">> Não há clientes cadastrados.");
         }
@@ -408,10 +394,9 @@ public class Remover extends javax.swing.JFrame {
 //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="preencherCampos()">
-    void preencherCampos(){
-        //txtCadastros.setText(String.valueOf(qtdClientes+1));
-        txtCadastros.setText(String.valueOf(cadastro.proximo + 1));
-
+   void preencherCampos(){
+        txtCadastros.setText(String.valueOf(ultimo+1));
+        
         //*********
         txtCod.setText(String.valueOf(cliente[atual].cod));
         txtNome.setText(cliente[atual].nome);
@@ -427,16 +412,12 @@ public class Remover extends javax.swing.JFrame {
 //</editor-fold>
     
     public boolean haClientes(){
-        if(cliente[0]!=null){
-            return true;
-        } else {
-            return false;
-        }
+        return cliente[0]!=null;
     }
 
     //<editor-fold defaultstate="collapsed" desc="proximo()">
     void proximo() {
-        if (atual < qtdClientes) {
+        if (atual < ultimo) {
             ++atual;
         } else {
             atual = 0;
@@ -450,7 +431,7 @@ public class Remover extends javax.swing.JFrame {
         if (atual > 0) {
             --atual;
         } else {
-            atual = qtdClientes;
+            atual = ultimo;
         }
         //System.out.println("> Atual: "+atual);
     }
@@ -513,7 +494,7 @@ public class Remover extends javax.swing.JFrame {
     private javax.swing.JLabel lblinf1;
     private javax.swing.JLabel lblinf2;
     private javax.swing.JTextField txtCPF;
-    private javax.swing.JTextField txtCadastros;
+    public javax.swing.JTextField txtCadastros;
     private javax.swing.JTextField txtCidade;
     private javax.swing.JTextField txtCod;
     private javax.swing.JTextArea txtDescricao;

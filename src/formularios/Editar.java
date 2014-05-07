@@ -503,16 +503,14 @@ public class Editar extends javax.swing.JFrame {
         }
         
         //cad.numero=cadastros;
-        System.out.println("> Alterações do cliente "+(atual)+" feitas com sucesso.");
+        System.out.println("> Alterações (CLIENTE "+(atual)+") realizadas.");
+        JOptionPane.showMessageDialog(null, "As alterações foram realizadas.", 
+                "Cliente (CODIGO: "+atual+")", JOptionPane.INFORMATION_MESSAGE);
     }
 //</editor-fold>
     
     public boolean haClientes(){
-        if(cliente[0]!=null){
-            return true;
-        } else {
-            return false;
-        }
+        return cliente[0]!=null;
     }
     
     //<editor-fold defaultstate="collapsed" desc="Método Main()">

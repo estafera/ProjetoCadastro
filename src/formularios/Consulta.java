@@ -12,21 +12,7 @@ import parser.XML;
  */
 //</editor-fold>
 public class Consulta extends javax.swing.JFrame {
-//<editor-fold defaultstate="collapsed" desc="INFORMAÇÕES DO CLIENTE">
-    /*  
-        0 - codigo do cliente
-        1 - nome completo
-        2 - cpf
-        3 - telefone
-        4 - cidade/estado
-        5 - endereço
-        6 - email
-        7 - nome do programa
-        8 - plataforma
-        9 - descrição
-    */
-//</editor-fold>
-    int qtdClientes = 0, atual = 0;
+    int ultimo = 0, atual = 0;
     Cliente[] cliente;
     Cadastros cadastros = new Cadastros();
     String destino = "./src/arquivos/db/";
@@ -336,7 +322,7 @@ public class Consulta extends javax.swing.JFrame {
         cliente = xml.lerClientes();
         if(haClientes()){
             cadastros.proximo = ultimoCliente(cliente).cod;
-            qtdClientes = cadastros.proximo;
+            ultimo = cadastros.proximo;
 
             //<editor-fold defaultstate="collapsed" desc="rascunhos">
             //cad = xml.lerCadastros();
@@ -356,7 +342,7 @@ public class Consulta extends javax.swing.JFrame {
             }*/
     //</editor-fold>
 
-            System.out.println("> Dados de clientes carregados com sucesso." );
+            System.out.println("> Dados de clientes carregados com sucesso."+cadastros.proximo);
         } else {
             JOptionPane.showMessageDialog(this, "Não há clientes cadastrados.", "Erro!", JOptionPane.ERROR_MESSAGE);
         }
@@ -369,7 +355,7 @@ public class Consulta extends javax.swing.JFrame {
             leituraInicial();
             initComponents();
             preencherCampos();
-            cadastros.proximo=0;
+            //cadastros.proximo=0;
         } catch(FileNotFoundException e){
             System.out.println("Arquivo não encontrado "+e);
         } catch (NullPointerException e){
@@ -380,7 +366,8 @@ public class Consulta extends javax.swing.JFrame {
     
     //<editor-fold defaultstate="collapsed" desc="preencherCampos()">
     void preencherCampos(){
-        txtCadastros.setText(String.valueOf(qtdClientes+1));
+        txtCadastros.setText(String.valueOf(ultimo+1));
+        
         txtCod.setText(String.valueOf(cliente[atual].cod));
         txtNome.setText(cliente[atual].nome);
         txtCPF.setText(cliente[atual].cpf);
@@ -389,7 +376,6 @@ public class Consulta extends javax.swing.JFrame {
         txtEndereco.setText(cliente[atual].endereco);
         txtEmail.setText(cliente[atual].email);
         txtPrograma.setText(cliente[atual].programa);
-        //txtPlataforma.setText(cliente[atual].plataforma);
         txtDescricao.setText(cliente[atual].descricao);
         
         resetarBotoes();
@@ -436,7 +422,7 @@ public class Consulta extends javax.swing.JFrame {
     
     //<editor-fold defaultstate="collapsed" desc="proximo()">
     void proximo(){
-        if(atual<qtdClientes){
+        if(atual<ultimo){
             ++atual;
         } else {
             atual = 0;
@@ -450,7 +436,7 @@ public class Consulta extends javax.swing.JFrame {
         if(atual>0){
             --atual;
         } else {
-            atual = qtdClientes;
+            atual = ultimo;
         }
         //System.out.println("> Atual: "+atual);
     }
@@ -472,11 +458,7 @@ public class Consulta extends javax.swing.JFrame {
 //</editor-fold>
     
     public boolean haClientes(){
-        if(cliente[0]!=null){
-            return true;
-        } else {
-            return false;
-        }
+        return cliente[0]!=null;
     }
     
     //<editor-fold defaultstate="collapsed" desc="Método Main()">

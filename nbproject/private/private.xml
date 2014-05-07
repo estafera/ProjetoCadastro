@@ -3,11 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Google%20Drive/JAVA%20-%20Ultimos%20projetos/ProjetoCadastro/src/arquivos/db/clientes_1.xml</file>
             <file>file:/D:/Google%20Drive/JAVA%20-%20Ultimos%20projetos/ProjetoCadastro/src/parser/XML.java</file>
+            <file>file:/D:/Google%20Drive/JAVA%20-%20Ultimos%20projetos/ProjetoCadastro/src/parser/Cliente.java</file>
             <file>file:/D:/Google%20Drive/JAVA%20-%20Ultimos%20projetos/ProjetoCadastro/src/formularios/Cadastro.java</file>
+            <file>file:/D:/Google%20Drive/JAVA%20-%20Ultimos%20projetos/ProjetoCadastro/src/arquivos/db/clientes.xml</file>
             <file>file:/D:/Google%20Drive/JAVA%20-%20Ultimos%20projetos/ProjetoCadastro/src/formularios/Consulta.java</file>
+            <file>file:/D:/Google%20Drive/JAVA%20-%20Ultimos%20projetos/ProjetoCadastro/src/formularios/FormPrincipal.java</file>
             <file>file:/D:/Google%20Drive/JAVA%20-%20Ultimos%20projetos/ProjetoCadastro/src/formularios/Remover.java</file>
+            <file>file:/D:/Google%20Drive/JAVA%20-%20Ultimos%20projetos/ProjetoCadastro/src/formularios/Editar.java</file>
         </group>
     </open-files>
 </project-private>

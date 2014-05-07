@@ -274,6 +274,8 @@ public class Cadastro extends javax.swing.JFrame {
         cadastrar();
         try {
             xml.salvarClientes(cliente);
+            JOptionPane.showMessageDialog(null, "Cliente cadastrado.");
+            limparCampos();
             //xml.salvarCadastros(cadastros);
         } catch (IOException ex) {
             Logger.getLogger(Cadastro.class.getName()).log(Level.SEVERE, null, ex);
@@ -481,11 +483,7 @@ public class Cadastro extends javax.swing.JFrame {
 //</editor-fold>
     
     public boolean haClientes(){
-        if(cliente[0]!=null){
-            return true;
-        } else {
-            return false;
-        }
+        return cliente[0]!=null;
     }
     
     //<editor-fold defaultstate="collapsed" desc="[rascunhos] FUNÇÕES ANTIGAS">
