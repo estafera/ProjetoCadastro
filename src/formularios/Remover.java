@@ -326,7 +326,6 @@ public class Remover extends javax.swing.JFrame {
 //</editor-fold>
         for (int i = atual; i < ultimo; i++) {
             int j = i + 1;
-            //System.out.println("> i atual: "+i+"\nj: "+j);
             cliente[i] = cliente[j];
             cliente[i].cod--;
         }

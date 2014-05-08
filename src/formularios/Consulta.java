@@ -342,7 +342,7 @@ public class Consulta extends javax.swing.JFrame {
             }*/
     //</editor-fold>
 
-            System.out.println("> Dados de clientes carregados com sucesso."+cadastros.proximo);
+            System.out.println("> Dados de clientes carregados com sucesso.");
         } else {
             JOptionPane.showMessageDialog(this, "Não há clientes cadastrados.", "Erro!", JOptionPane.ERROR_MESSAGE);
         }

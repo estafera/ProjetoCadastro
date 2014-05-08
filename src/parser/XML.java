@@ -29,83 +29,90 @@ public class XML {
     
     public String destino; // = "./arquivos/clientes.xml";
     public String nomeArqClientes = "clientes.xml";
-    File arquivoClientes, arquivoCadastros;
     
+    File arquivoClientes, arquivoCadastros;    
     
+    //<editor-fold defaultstate="collapsed" desc="Construtor">
     public XML(String destinoDoArquivo){
-        
         destino = destinoDoArquivo;
         arquivoClientes = new File(destino+nomeArqClientes);
         
         parser.setMode(XStream.NO_REFERENCES);
         parser.alias("Cliente", Cliente.class);
     }
+//</editor-fold>
     
+    //<editor-fold defaultstate="collapsed" desc="criarClientesTeste()">
     public Cliente[] criarClientesTeste(){
-        int cadastros = 0;
-        Cliente[] c = new Cliente[2];
+        Cliente[] cliente = new Cliente[2];
         
-        c[0] = new Cliente();
-        c[0].cod = cadastros;
-        c[0].nome = "Ramon Honorio";
-        c[0].cpf = "12345678900";
-        c[0].endereco = "Rua qualquer, 86";
-        c[0].cidade = "São Paulo/SP";
-        c[0].telefone = "1166123552";
-        c[0].email = "ramonaqh@gmail.com";
+        cliente[0] = new Cliente();
+        cliente[0].cod = 0;
+        cliente[0].nome = "Ramon Honorio";
+        cliente[0].cpf = "12345678900";
+        cliente[0].endereco = "Rua qualquer, 86";
+        cliente[0].cidade = "São Paulo/SP";
+        cliente[0].telefone = "1166123552";
+        cliente[0].email = "ramonaqh@gmail.com";
         
-        c[0].programa = "Jogo";
-        c[0].plataforma = "Desktop";
-        c[0].descricao = "Descrição do jogo qualquer de desktop.";
+        cliente[0].programa = "Jogo";
+        cliente[0].plataforma = "Desktop";
+        cliente[0].descricao = "Descrição do jogo qualquer de desktop.";
         
-        cadastros++;
         //---------------
-        c[1] = new Cliente();
-        c[1].cod = cadastros;
-        c[1].nome = "Sakata Gintoki";
-        c[1].cpf = "98765432100";
-        c[1].endereco = "Distrito Kabuki, 264";
-        c[1].cidade = "Edo";
-        c[1].telefone = "948461262";
-        c[1].email = "yorozuyaGintoki@gmail.com";        
+        cliente[1] = new Cliente();
+        cliente[1].cod = 1;
+        cliente[1].nome = "Sakata Gintoki";
+        cliente[1].cpf = "98765432100";
+        cliente[1].endereco = "Distrito Kabuki, 264";
+        cliente[1].cidade = "Edo";
+        cliente[1].telefone = "948461262";
+        cliente[1].email = "yorozuyaGintoki@gmail.com";
         
-        c[1].programa = "Site";
-        c[1].plataforma = "Web";
-        c[1].descricao = "Descrição do site qualquer.";
+        cliente[1].programa = "Site";
+        cliente[1].plataforma = "Web";
+        cliente[1].descricao = "Descrição do site qualquer.";
         
-        return c;
+        return cliente;
     }
+//</editor-fold>
     
-    public Object serializar(File arquivo) throws FileNotFoundException{
-        arqEntrada = new FileInputStream(arquivo);
+    // LÊ AS INFORMAÇÕES DO XML E RETORNA UMA MATRIZ
+    public Object serializar(File destino) throws FileNotFoundException{
+        arqEntrada = new FileInputStream(destino);
         return parser.fromXML(arqEntrada);
     }
     
+    // SALVA AS INFORMAÇÕES DO XML
     public void deserializar(File destino, Cliente[] lista) throws FileNotFoundException, IOException {
         criarNovoArquivo(destino);
         arqSaida = new FileOutputStream(destino);
         parser.toXML(lista, arqSaida);
     }
     
+    // TRATAMENTO DE ERROS AO LER O XML DOS CLIENTES
     public Cliente[] lerClientes() throws FileNotFoundException {
         try {
+            // 
             return (Cliente[]) serializar(arquivoClientes);
         } catch (FileNotFoundException e){
-            try{
+            try {
                 deserializar(arquivoClientes, criarClientesTeste());
-            } catch (IOException f){
+            } catch (IOException f) {
                 System.out.println("IO lerClientes()");
             }
             return (Cliente[]) serializar(arquivoClientes);
         }
-        //return (Cliente[]) lerArquivo(arquivo);
     }
     
-    public void listarClientes(int numCadastros) throws FileNotFoundException{
+    // LISTA OS CLIENTES NO CONSOLE
+    public void listarClientes(int numeroDeCadastros) throws FileNotFoundException {
         Cliente[] cliente = lerClientes();
+        
         System.out.println("====== CONSULTA ========\n"
-                + "> Qtd espaço na matriz: "+cliente.length);
-        for (int i = 0; i < numCadastros; i++) {
+                + "> Qtd de espaço na matriz: "+cliente.length);
+        
+        for (int i = 0; i < numeroDeCadastros; i++) {
             try {
                 System.out.println(
                         "==============\n"
@@ -125,55 +132,21 @@ public class XML {
         System.out.println("==============");
     }
     
+    // SALVA E MOSTRA O LOCAL ONDE FOI ARMAZENADO
     public void salvarClientes(Cliente[] cliente) throws IOException{
         deserializar(arquivoClientes, cliente);
         System.out.println("XML salvo em: "+arquivoClientes);
     }
     
-    public void salvarClientesTeste() throws IOException{
-        Cliente[] cliente = criarClientesTeste();
-        deserializar(arquivoClientes, cliente);
-    }
     
-    public void criarNovoArquivo(File f){
-        if(f.exists()){
-            f.delete();
+    public void criarNovoArquivo(File arquivo){
+        if(arquivo.exists()){
+            arquivo.delete();
         }
-        try{ 
-            f.createNewFile();
+        try { 
+            arquivo.createNewFile();
         } catch (IOException e){
-            System.out.println("IO criarNovoArquivo() "+e);
+            System.out.println("> Erro ao criar o arquivo XML. "+e);
         }
-    }
-    
-//<editor-fold defaultstate="collapsed" desc="rascunhos">
-    /*
-    public void deserializarCad(File destino, Cadastros c) throws FileNotFoundException, IOException{
-    criarNovoArquivo(destino);
-    arqSaida = new FileOutputStream(destino);
-    parser.toXML(c, arqSaida);
-    }
-    
-    public void salvarCadastros(Cadastros c) throws IOException {
-    deserializarCad(arquivoCadastros, c);
-    }
-    
-    
-    public Cadastros lerCadastros() throws FileNotFoundException {
-    try {
-    return (Cadastros) serializar(arquivoCadastros);
-    } catch (FileNotFoundException e){
-    try{
-    Cadastros t = new Cadastros();
-    t.qtd=2;
-    deserializarCad(arquivoCadastros, t);
-    } catch (IOException f){
-    System.out.println("IO lerCadastros()");
-    }
-    return (Cadastros) serializar(arquivoCadastros);
-    }
-    //return (Cliente[]) lerArquivo(arquivo);
-    }*/
-//</editor-fold>
-    
+    }    
 }
