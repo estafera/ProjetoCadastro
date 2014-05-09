@@ -6,11 +6,6 @@
 package formularios;
 
 //<editor-fold defaultstate="collapsed" desc="Desenvolvedores">
-
-import java.io.FileNotFoundException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /*
  * @authors Ramon Honorio, Maikon Evangelista, João Paulo Silva
  */

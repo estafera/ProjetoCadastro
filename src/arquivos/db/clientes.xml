@@ -1,18 +1,6 @@
 <Cliente-array>
   <Cliente>
     <cod>0</cod>
-    <nome>Sakata Gintoki</nome>
-    <cpf>98765432100</cpf>
-    <telefone>948461262</telefone>
-    <cidade>Edo</cidade>
-    <endereco>Distrito Kabuki, 264</endereco>
-    <email>yorozuyaGintoki@gmail.com</email>
-    <programa>Site</programa>
-    <plataforma>Web</plataforma>
-    <descricao>Descrição do site qualquer.</descricao>
-  </Cliente>
-  <Cliente>
-    <cod>1</cod>
     <nome>Adalberto Adamastor</nome>
     <cpf>15998745630</cpf>
     <telefone>1189597423</telefone>
@@ -29,6 +17,7 @@ para sua comunidade local. Você também pode ativamente alertar sobre acidentes
 e pode receber alertas que surjam na sua rota. Descubra o posto de combustível mais barato em sua rota com os preços atualizados pela comunidade. 
 Algo que também torne simples e divertido encontrar seus amigos por aí.</descricao>
   </Cliente>
+  <null/>
   <null/>
   <null/>
 </Cliente-array>

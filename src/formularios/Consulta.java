@@ -296,11 +296,7 @@ public class Consulta extends javax.swing.JFrame {
 
     private void botaoVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoVoltarActionPerformed
         // TODO add your handling code here:
-        //System.exit(0);
-        
-        
-        cadastros.proximo=0;
-        
+        //System.exit(0);        
         
         dispose();
     }//GEN-LAST:event_botaoVoltarActionPerformed
@@ -320,9 +316,9 @@ public class Consulta extends javax.swing.JFrame {
     //<editor-fold defaultstate="collapsed" desc="leituraInicial()">
     void leituraInicial() throws FileNotFoundException{
         cliente = xml.lerClientes();
+        
         if(haClientes()){
-            cadastros.proximo = ultimoCliente(cliente).cod;
-            ultimo = cadastros.proximo;
+            ultimo = ultimoCliente(cliente).cod;
 
             //<editor-fold defaultstate="collapsed" desc="rascunhos">
             //cad = xml.lerCadastros();
@@ -355,7 +351,6 @@ public class Consulta extends javax.swing.JFrame {
             leituraInicial();
             initComponents();
             preencherCampos();
-            //cadastros.proximo=0;
         } catch(FileNotFoundException e){
             System.out.println("Arquivo não encontrado "+e);
         } catch (NullPointerException e){
@@ -443,20 +438,24 @@ public class Consulta extends javax.swing.JFrame {
 //</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc="ultimoCliente(Cliente[] c)">
-    Cliente ultimoCliente(Cliente[] c){
+    Cliente ultimoCliente(Cliente[] lista){
         int ultimo = 0;
         
-        for (int i = 0; i < c.length; i++) {
-            if(c[i]==null){
+        for (int i = 0; i < lista.length; i++) {
+            // CHECA SE O CLIENTE DA POSIÇÃO I NÃO É NULO
+            if(lista[i]==null){
+                // RETORNA O CLIENTE ANTERIOR 
                 if(i!=0) ultimo = i-1;
                 break;
             }
         }
         
-        return c[ultimo];
+        return lista[ultimo];
     }
 //</editor-fold>
     
+    
+    // VERIFICA SE JÁ EXISTEM CLIENTES CADASTRADOS E RETORNA O VALOR COMO TRUE/FALSE
     public boolean haClientes(){
         return cliente[0]!=null;
     }

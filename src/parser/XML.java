@@ -22,26 +22,30 @@ import java.io.OutputStream;
  */
 //</editor-fold>
 public class XML {
+    // BIBLIOTECA UTILIZADA
+    XStream xstream = new XStream(new DomDriver());
     
-    XStream parser = new XStream(new DomDriver());
+    // ARQUIVOS DE ENTRADA E SAÍDA
     OutputStream arqSaida = null;
     InputStream arqEntrada = null;
     
-    public String destino; // = "./arquivos/clientes.xml";
-    public String nomeArqClientes = "clientes.xml";
+    public String destino; // = "./arquivos/db/clientes.xml";
+    public String nomeDoArquivo = "clientes.xml";
     
-    File arquivoClientes, arquivoCadastros;    
+    File arquivo;    
     
     //<editor-fold defaultstate="collapsed" desc="Construtor">
     public XML(String destinoDoArquivo){
         destino = destinoDoArquivo;
-        arquivoClientes = new File(destino+nomeArqClientes);
+        arquivo = new File(destino+nomeDoArquivo);
         
-        parser.setMode(XStream.NO_REFERENCES);
-        parser.alias("Cliente", Cliente.class);
+        // FUNÇÕES ABAIXO JÁ SÃO FORNECIDAS PELA BIBLIOTECA
+        xstream.setMode(XStream.NO_REFERENCES);
+        xstream.alias("Cliente", Cliente.class);
     }
 //</editor-fold>
     
+    // CRIA DOIS CLIENTES DE TESTE
     //<editor-fold defaultstate="collapsed" desc="criarClientesTeste()">
     public Cliente[] criarClientesTeste(){
         Cliente[] cliente = new Cliente[2];
@@ -78,30 +82,30 @@ public class XML {
 //</editor-fold>
     
     // LÊ AS INFORMAÇÕES DO XML E RETORNA UMA MATRIZ
-    public Object serializar(File destino) throws FileNotFoundException{
+    public Object serializar(File destino) throws FileNotFoundException {
         arqEntrada = new FileInputStream(destino);
-        return parser.fromXML(arqEntrada);
+        return xstream.fromXML(arqEntrada);
     }
     
     // SALVA AS INFORMAÇÕES DO XML
     public void deserializar(File destino, Cliente[] lista) throws FileNotFoundException, IOException {
         criarNovoArquivo(destino);
         arqSaida = new FileOutputStream(destino);
-        parser.toXML(lista, arqSaida);
+        xstream.toXML(lista, arqSaida);
     }
     
     // TRATAMENTO DE ERROS AO LER O XML DOS CLIENTES
     public Cliente[] lerClientes() throws FileNotFoundException {
         try {
             // 
-            return (Cliente[]) serializar(arquivoClientes);
+            return (Cliente[]) serializar(arquivo);
         } catch (FileNotFoundException e){
             try {
-                deserializar(arquivoClientes, criarClientesTeste());
+                deserializar(arquivo, criarClientesTeste());
             } catch (IOException f) {
                 System.out.println("IO lerClientes()");
             }
-            return (Cliente[]) serializar(arquivoClientes);
+            return (Cliente[]) serializar(arquivo);
         }
     }
     
@@ -134,11 +138,14 @@ public class XML {
     
     // SALVA E MOSTRA O LOCAL ONDE FOI ARMAZENADO
     public void salvarClientes(Cliente[] cliente) throws IOException{
-        deserializar(arquivoClientes, cliente);
-        System.out.println("XML salvo em: "+arquivoClientes);
+        deserializar(arquivo, cliente);
+        System.out.println("XML salvo em: "+arquivo);
     }
     
-    
+    /*
+        FUNÇÃO QUE SUBSTITUI O ARQUIVO EXISTENTE (SE EXISTIR)
+        POR UM NOVO COM AS INFORMAÇÕES ATUALIZADAS
+    */
     public void criarNovoArquivo(File arquivo){
         if(arquivo.exists()){
             arquivo.delete();
@@ -148,5 +155,6 @@ public class XML {
         } catch (IOException e){
             System.out.println("> Erro ao criar o arquivo XML. "+e);
         }
-    }    
+    }   
+    
 }
