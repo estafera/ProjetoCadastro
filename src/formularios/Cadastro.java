@@ -5,17 +5,18 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import parser.Cadastros;
-import parser.Cliente;
-import parser.XML;
+import classes.Cadastros;
+import classes.Cliente;
+import classes.XML;
 
 //<editor-fold defaultstate="collapsed" desc="Desenvolvedores">
 /*
  * @authors Ramon Honorio, Maikon Evangelista, João Paulo Silva
  */
 //</editor-fold>
+
 public class Cadastro extends javax.swing.JFrame {
-    int incremento = 3, espacoMatriz; //qtd = 2, cadastros = 0;
+    int incremento = 3, espacoMatriz = 0, atual = 0;
     Cadastros cadastros = new Cadastros();
     Cliente[] cliente;
     String destino = "./src/arquivos/db/";
@@ -276,7 +277,6 @@ public class Cadastro extends javax.swing.JFrame {
             xml.salvarClientes(cliente);
             JOptionPane.showMessageDialog(null, "Cliente cadastrado.");
             limparCampos();
-            //xml.salvarCadastros(cadastros);
         } catch (IOException ex) {
             Logger.getLogger(Cadastro.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -288,10 +288,8 @@ public class Cadastro extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoLimparActionPerformed
 
     private void botaoConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoConsultaActionPerformed
-        // TODO add your handling code here:
-        //imprimeClientes();
         try {
-            xml.listarClientes(cadastros.proximo);
+            xml.listarClientes(atual);
         } catch (FileNotFoundException x) {
             Logger.getLogger(Cadastro.class.getName()).log(Level.SEVERE, null, x);
         }
@@ -299,18 +297,16 @@ public class Cadastro extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoConsultaActionPerformed
 
     private void botaoVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoVoltarActionPerformed
-        // TODO add your handling code here:
-        //System.exit(0);
         limparCampos();
         this.dispose();
     }//GEN-LAST:event_botaoVoltarActionPerformed
 
     //<editor-fold defaultstate="collapsed" desc="limparCampos()">
     void limparCampos(){
-        /*
+    /*
         FUNÇÃO QUE ATRIBUI À TODOS OS CAMPOS
-        UM VALOR NULO
-        */
+        UM VALOR NULO (DEIXA TODOS OS CAMPOS "LIMPOS")
+    */
         txtNome.setText(null);
         txtCPF.setText(null);
         txtTel.setText(null);
@@ -324,25 +320,24 @@ public class Cadastro extends javax.swing.JFrame {
     
     //<editor-fold defaultstate="collapsed" desc="imprimeClientes()">
     void imprimeClientes(){
-        /*
+    /*
         UTILIZA-SE UM LAÇO DE REPETIÇÃO (FOR) PARA QUE SEJA IMPRESSO NO CONSOLE
-        CADA INFORMAÇÃO DO USUÁRIO CADASTRADO
-        */
-        
+        CADA INFORMAÇÃO DE USUÁRIOS CADASTRADOS
+    */
         System.out.println("====== CONSULTA ========\n> Qtd espaço na matriz: "+cliente.length);
-        for (int i = 0; i < cadastros.proximo; i++) {
+        for (int i = 0; i < atual; i++) {
             System.out.println(
                     "==============\n"
-                            + "Cod Cliente: "+cliente[i].cod+"\n"
-                            + "Nome: "+cliente[i].nome+"\n"
-                            + "CPF: "+cliente[i].cpf+"\n"
-                            + "Tel: "+cliente[i].telefone+"\n"
-                            + "Cidade: "+cliente[i].cidade+"\n"
-                            + "Endereço: "+cliente[i].endereco+"\n"
-                            + "Email: "+cliente[i].email+"\n"
-                            + "Programa: "+cliente[i].programa+"\n"
-                            + "Plataforma: "+cliente[i].plataforma+"\n"
-                            + "Descrição: "+cliente[i].descricao
+                    + "Cod Cliente: "+  cliente[i].cod          +"\n"
+                    + "Nome: "+         cliente[i].nome         +"\n"
+                    + "CPF: "+          cliente[i].cpf          +"\n"
+                    + "Tel: "+          cliente[i].telefone     +"\n"
+                    + "Cidade: "+       cliente[i].cidade       +"\n"
+                    + "Endereço: "+     cliente[i].endereco     +"\n"
+                    + "Email: "+        cliente[i].email        +"\n"
+                    + "Programa: "+     cliente[i].programa     +"\n"
+                    + "Plataforma: "+   cliente[i].plataforma   +"\n"
+                    + "Descrição: "+    cliente[i].descricao
             );
         }
         System.out.println("==============");
@@ -351,7 +346,7 @@ public class Cadastro extends javax.swing.JFrame {
     
     //<editor-fold defaultstate="collapsed" desc="matrizCheia()">
     boolean matrizCheia(){
-        if(cadastros.proximo>=espacoMatriz){
+        if(atual>=espacoMatriz){
             System.out.println("> Matriz atual cheia.");
             return true;
         } else {
@@ -362,7 +357,6 @@ public class Cadastro extends javax.swing.JFrame {
 
     //<editor-fold defaultstate="collapsed" desc="novaMatriz()">
     Cliente[] novaMatriz() {
-        //cadastros.ultimo = ultimoCliente(cliente).cod+1;
         int novaQtd = espacoMatriz+incremento;
         Cliente[] novaMatriz = new Cliente[novaQtd];
         
@@ -404,35 +398,32 @@ public class Cadastro extends javax.swing.JFrame {
         if(matrizCheia()){
             cliente = (Cliente[]) novaMatriz();
         }
-        //cadastros.ultimo = ultimoCliente(cliente).cod;
-        //System.out.println(">> cadastros.ultimo: "+cadastros.ultimo);
         
-        // instanciando um objeto Cliente
-        cliente[cadastros.proximo] = new Cliente();
+        // INSTANCIANDO UM OBJETO DA CLASSE CLIENTE
+        cliente[atual] = new Cliente();
         
-        cliente[cadastros.proximo].cod = cadastros.proximo;
-        cliente[cadastros.proximo].nome = txtNome.getText();
-        cliente[cadastros.proximo].cpf = txtCPF.getText();
-        cliente[cadastros.proximo].telefone = txtTel.getText();
-        cliente[cadastros.proximo].cidade = txtCidade.getText();
-        cliente[cadastros.proximo].endereco = txtEndereco.getText();
-        cliente[cadastros.proximo].email = txtEmail.getText();
-        cliente[cadastros.proximo].programa = txtPrograma.getText();
-        cliente[cadastros.proximo].descricao = txtDescricao.getText();
+        cliente[atual].cod = atual;
+        cliente[atual].nome = txtNome.getText();
+        cliente[atual].cpf = txtCPF.getText();
+        cliente[atual].telefone = txtTel.getText();
+        cliente[atual].cidade = txtCidade.getText();
+        cliente[atual].endereco = txtEndereco.getText();
+        cliente[atual].email = txtEmail.getText();
+        cliente[atual].programa = txtPrograma.getText();
+        cliente[atual].descricao = txtDescricao.getText();
         
         if(radioWeb.isSelected()){
-            cliente[cadastros.proximo].plataforma = "Web";
+            cliente[atual].plataforma = "Web";
         } else if(radioDesk.isSelected()){
-            cliente[cadastros.proximo].plataforma = "Desktop";
+            cliente[atual].plataforma = "Desktop";
         } else if(radioMobile.isSelected()){
-            cliente[cadastros.proximo].plataforma = "Mobile";
+            cliente[atual].plataforma = "Mobile";
         } else {
-            cliente[cadastros.proximo].plataforma = "Outra";
+            cliente[atual].plataforma = "Outra";
         }
         
-        cadastros.proximo++;
-        //cad.numero=cadastros;
-        System.out.println("> Cliente "+(cadastros.proximo)+" cadastrado.");
+        atual++;
+        System.out.println("> Cliente "+(atual)+" cadastrado.");
     }
 //</editor-fold>
     
@@ -441,16 +432,12 @@ public class Cadastro extends javax.swing.JFrame {
         cliente = xml.lerClientes();
         espacoMatriz = cliente.length;
         if(haClientes()) {
-            cadastros.proximo = ultimoCliente(cliente).cod+1;
+            atual = ultimoCliente(cliente).cod+1;
 
-            System.out.println("> Dados de clientes carregados com sucesso." 
-    //<editor-fold defaultstate="collapsed" desc="rascunhos">
-                    //+ "\n>>>> ultimoCliente(cliente).cod="+ultimoCliente(cliente).cod
-                    //+ "\n>>>> cadastros.proximo: "+cadastros.proximo
-    //</editor-fold>
+            System.out.println("> Dados de clientes carregados com sucesso."
             );
         }  else {
-            cadastros.proximo = 0;
+            atual = 0;
         }
     }
 //</editor-fold>
@@ -482,88 +469,13 @@ public class Cadastro extends javax.swing.JFrame {
     }
 //</editor-fold>
     
+    //<editor-fold defaultstate="collapsed" desc="haClientes()">
     public boolean haClientes(){
         return cliente[0]!=null;
     }
-    
-    //<editor-fold defaultstate="collapsed" desc="[rascunhos] FUNÇÕES ANTIGAS">
-    // === FUNÇÕES ANTIGAS == //
-    /*
-    private void inicializarClientes(){
-    for (int i = 0; i < qtdClientes; i++) {
-    cliente[i] = new Cliente();
-    }
-    }
-    private void cadastrarOld(){
-    if(matrizCheia()){
-    oldClientes = novaMatrizOld();
-    }
-    
-    oldClientes[cadastros][0] = cadastros.toString();
-    oldClientes[cadastros][1] = txtNome.getText();
-    oldClientes[cadastros][2] = txtCPF.getText();
-    oldClientes[cadastros][3] = txtTel.getText();
-    oldClientes[cadastros][4] = txtCidade.getText();
-    oldClientes[cadastros][5] = txtEndereco.getText();
-    oldClientes[cadastros][6] = txtEmail.getText();
-    oldClientes[cadastros][7] = txtPrograma.getText();
-    oldClientes[cadastros][9] = txtDescricao.getText();
-    
-    if(radioWeb.isSelected()){
-    oldClientes[cadastros][8] = "Web";
-    } else if(radioDesk.isSelected()){
-    oldClientes[cadastros][8] = "Desktop";
-    } else if(radioMobile.isSelected()){
-    oldClientes[cadastros][8] = "Mobile";
-    } else {
-    oldClientes[cadastros][8] = "Outra";
-    }
-    
-    System.out.println("> Cliente "+(cadastros+1)+" cadastrado.");
-    cadastros++;
-    }
-    private String[][] novaMatrizOld(){
-    
-    int novaQtd = qtdClientes+incremento;
-    String[][] novaMatriz = new String[novaQtd][qtdInformacoes];
-    
-    for (int i = 0; i < qtdClientes; i++) {
-    System.out.println("> Copiando informações do Cliente (cod "+i+
-    ") para a nova matriz:");
-    for (int j = 0; j < qtdInformacoes; j++) {
-    novaMatriz[i][j] = oldClientes[i][j];
-    System.out.println(novaMatriz[i][j]);
-    }
-    System.out.println("============");
-    }
-    
-    qtdClientes = novaQtd;
-    
-    return novaMatriz;
-    }
-    private void imprimeClientesOld(){
-    System.out.println("====== CONSULTA ========\n> Qtd espaço na matriz: "+oldClientes.length);
-    for (int i = 0; i < cadastros; i++) {
-    System.out.println(
-    "==============\n"
-    + "Cod Cliente: "+oldClientes[i][0]+"\n"
-    + "Nome: "+oldClientes[i][1]+"\n"
-    + "CPF: "+oldClientes[i][2]+"\n"
-    + "Tel: "+oldClientes[i][3]+"\n"
-    + "Cidade: "+oldClientes[i][4]+"\n"
-    + "Endereço: "+oldClientes[i][5]+"\n"
-    + "Email: "+oldClientes[i][6]+"\n"
-    + "Programa: "+oldClientes[i][7]+"\n"
-    + "Plataforma: "+oldClientes[i][8]+"\n"
-    + "Descrição: "+oldClientes[i][9]
-    );
-    }
-    System.out.println("==============");
-    }
-    */
 //</editor-fold>
 
-    //<editor-fold defaultstate="collapsed" desc="Main()">
+    //<editor-fold defaultstate="collapsed" desc="Método main(String args[])">
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

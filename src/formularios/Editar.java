@@ -5,9 +5,9 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import parser.Cadastros;
-import parser.Cliente;
-import parser.XML;
+import classes.Cadastros;
+import classes.Cliente;
+import classes.XML;
 
 //<editor-fold defaultstate="collapsed" desc="Desenvolvedores">
 /*
@@ -37,13 +37,6 @@ public class Editar extends javax.swing.JFrame {
     
     //<editor-fold defaultstate="collapsed" desc="método construtor Editar()">
     public Editar() {
-        /*initComponents();
-        try {
-            leituraInicial();
-        } catch(FileNotFoundException e){
-            System.out.println("Arquivo não encontrado "+e);
-        }
-        preencherCampos();*/
         inicializar();
     }
 //</editor-fold>
@@ -317,9 +310,8 @@ public class Editar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoVoltarActionPerformed
-        // TODO add your handling code here:
-        //System.exit(0);
-        cadastros.proximo=0;
+        //cadastros.proximo=0;
+        atual = 0;
         dispose();
     }//GEN-LAST:event_botaoVoltarActionPerformed
 
@@ -348,15 +340,9 @@ public class Editar extends javax.swing.JFrame {
     //<editor-fold defaultstate="collapsed" desc="leituraInicial()">
     void leituraInicial() throws FileNotFoundException{
         cliente = xml.lerClientes();
-        //System.out.println(cliente.length);
         
-        if(haClientes()){
-            cadastros.proximo = ultimoCliente(cliente).cod;
-//<editor-fold defaultstate="collapsed" desc="rascunhos">
-            //cad = xml.lerCadastros();
-            //qtdClientes = cliente.length;
-//</editor-fold>
-            for (int i = 0; i <= cadastros.proximo; i++) {
+        if(haClientes()){            
+            for (int i = 0; i <= ultimoCliente(cliente).cod; i++) {
                 try {
                     if(cliente[i]!=null){
                         qtdClientes = i;
@@ -377,10 +363,9 @@ public class Editar extends javax.swing.JFrame {
         try {
             leituraInicial();
             initComponents();
-            cadastros.proximo=0;
             preencherCampos();
         } catch(FileNotFoundException e){
-            System.out.println("Arquivo não encontrado "+e);
+            System.out.println(">> Arquivo não encontrado "+e);
         } catch (NullPointerException e){
             System.out.println(">> Não há clientes cadastrados.");
         }
@@ -398,10 +383,8 @@ public class Editar extends javax.swing.JFrame {
         txtEndereco.setText(cliente[atual].endereco);
         txtEmail.setText(cliente[atual].email);
         txtPrograma.setText(cliente[atual].programa);
-        //txtPlataforma.setText(cliente[atual].plataforma);
         txtDescricao.setText(cliente[atual].descricao);
         
-        //resetarBotoes();
         selecBotaoPlataforma(cliente[atual].plataforma);
         
     }
@@ -424,24 +407,20 @@ public class Editar extends javax.swing.JFrame {
     void selecBotaoPlataforma(String p){
         switch(p){
             case "Web":
-                //radioWeb.setEnabled(true);
                 radioWeb.setSelected(true);
                 break;
             case "Desktop":
-                //radioDesk.setEnabled(true);
                 radioDesk.setSelected(true);
                 break;
             case "Mobile":
-                //radioMobile.setEnabled(true);
                 radioMobile.setSelected(true);
                 break;
             case "Outra":
-                //radioOutra.setEnabled(true);
                 radioOutra.setSelected(true);
                 break;
         }
     }
-//</editor-fold>*/
+//</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc="proximo()">
     void proximo(){
@@ -450,7 +429,6 @@ public class Editar extends javax.swing.JFrame {
         } else {
             atual = 0;
         }
-        //System.out.println("> Atual: "+atual);
     }
 //</editor-fold>
     
@@ -461,7 +439,6 @@ public class Editar extends javax.swing.JFrame {
         } else {
             atual = qtdClientes;
         }
-        //System.out.println("> Atual: "+atual);
     }
 //</editor-fold>
     
@@ -502,7 +479,6 @@ public class Editar extends javax.swing.JFrame {
             cliente[atual].plataforma = "Outra";
         }
         
-        //cad.numero=cadastros;
         System.out.println("> Alterações (CLIENTE "+(atual)+") realizadas.");
         JOptionPane.showMessageDialog(null, "As alterações foram realizadas.", 
                 "Cliente (CODIGO: "+atual+")", JOptionPane.INFORMATION_MESSAGE);

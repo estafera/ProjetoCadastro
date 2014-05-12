@@ -5,15 +5,20 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import parser.Cadastros;
-import parser.Cliente;
-import parser.XML;
+import classes.Cadastros;
+import classes.Cliente;
+import classes.XML;
 
 //<editor-fold defaultstate="collapsed" desc="Desenvolvedores">
 /*
  * @authors Ramon Honorio, Maikon Evangelista, João Paulo Silva
  */
 //</editor-fold>
+
+/**
+ *
+ * @author RamonH
+ */
 public class Remover extends javax.swing.JFrame {
     int ultimo = 0, atual = 0;
     boolean matrizVazia = false;
@@ -23,7 +28,11 @@ public class Remover extends javax.swing.JFrame {
     XML xml = new XML(destino);
 
     //<editor-fold defaultstate="collapsed" desc="método construtor Remover()">
-    public Remover() {
+
+    /**
+     *
+     */
+        public Remover() {
         inicializar();
     }
 //</editor-fold>
@@ -285,30 +294,24 @@ public class Remover extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoVoltarActionPerformed
-        // TODO add your handling code here:
-        //System.exit(0);
-        //cadastro.proximo = 0;
         dispose();
     }//GEN-LAST:event_botaoVoltarActionPerformed
 
     private void botaoAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAnteriorActionPerformed
-        // TODO add your handling code here:
         anterior();
         preencherCampos();
     }//GEN-LAST:event_botaoAnteriorActionPerformed
 
     private void botaoProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoProximoActionPerformed
-        // TODO add your handling code here:
         proximo();
         preencherCampos();
     }//GEN-LAST:event_botaoProximoActionPerformed
 
     private void botaoRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoRemoverActionPerformed
-        // TODO add your handling code here:
         remover();
         try {
             xml.salvarClientes(cliente);
-            JOptionPane.showMessageDialog(this, "Cliente removido.");
+            JOptionPane.showMessageDialog(this, "> Cliente removido.");
         } catch (IOException ex) {
             Logger.getLogger(Remover.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -318,12 +321,6 @@ public class Remover extends javax.swing.JFrame {
 
     //<editor-fold defaultstate="collapsed" desc="remover()">
     void remover() {
-//<editor-fold defaultstate="collapsed" desc="rascunhos">
-        //Cliente[] novaMatriz = new Cliente[cadastro.posicao-1];
-
-        //cadastro.posicao--;
-        //System.out.println("Qtd: "+cadastro.proximo);
-//</editor-fold>
         for (int i = atual; i < ultimo; i++) {
             int j = i + 1;
             cliente[i] = cliente[j];
@@ -332,33 +329,24 @@ public class Remover extends javax.swing.JFrame {
 
         cliente[ultimo] = null;
         atual = ultimo - 1;
-
-//<editor-fold defaultstate="collapsed" desc="rascunhos">
-        /*
-         try {
-         xml.salvarCadastros(cadastro);
-         } catch (IOException ex) {
-         Logger.getLogger(Remover.class.getName()).log(Level.SEVERE, null, ex);
-         }*/
-//</editor-fold>
     }
 //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="ultimoCliente()">
     Cliente ultimoCliente(Cliente[] c) {
-        int ultimo = 0;
+        // ULTIMA POSIÇÃO QUE POSSUI UM CLIENTE NÃO NULO
+        int ultimaPos = 0;
 
         for (int i = 0; i < c.length; i++) {
             if (c[i] == null) {
                 if (i != 0) {
-                    ultimo = i - 1;
+                    ultimaPos = i - 1;
                 }
                 break;
             }
         }
-        
 
-        return c[ultimo];
+        return c[ultimaPos];
     }
 //</editor-fold>
 
@@ -377,7 +365,11 @@ public class Remover extends javax.swing.JFrame {
 //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="inicializar()">
-    public void inicializar() {
+
+    /**
+     *
+     */
+        public void inicializar() {
         
         try {
             leituraInicial();
@@ -410,6 +402,10 @@ public class Remover extends javax.swing.JFrame {
     }
 //</editor-fold>
     
+    /**
+     *
+     * @return
+     */
     public boolean haClientes(){
         return cliente[0]!=null;
     }
@@ -437,7 +433,12 @@ public class Remover extends javax.swing.JFrame {
 //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Método Main()">
-    public static void main(String args[]) {
+
+    /**
+     *
+     * @param args
+     */
+        public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

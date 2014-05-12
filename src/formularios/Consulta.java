@@ -2,9 +2,9 @@ package formularios;
 
 import java.io.FileNotFoundException;
 import javax.swing.JOptionPane;
-import parser.Cadastros;
-import parser.Cliente;
-import parser.XML;
+import classes.Cadastros;
+import classes.Cliente;
+import classes.XML;
 
 //<editor-fold defaultstate="collapsed" desc="Desenvolvedores">
 /*
@@ -295,20 +295,16 @@ public class Consulta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoVoltarActionPerformed
-        // TODO add your handling code here:
-        //System.exit(0);        
-        
+        // DISPOSE: FUNÇÃO QUE FECHA A JANELA (DESTA CLASSE)
         dispose();
     }//GEN-LAST:event_botaoVoltarActionPerformed
 
     private void botaoAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAnteriorActionPerformed
-        // TODO add your handling code here:
         anterior();
         preencherCampos();
     }//GEN-LAST:event_botaoAnteriorActionPerformed
 
     private void botaoProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoProximoActionPerformed
-        // TODO add your handling code here:
         proximo();
         preencherCampos();
     }//GEN-LAST:event_botaoProximoActionPerformed
@@ -319,25 +315,6 @@ public class Consulta extends javax.swing.JFrame {
         
         if(haClientes()){
             ultimo = ultimoCliente(cliente).cod;
-
-            //<editor-fold defaultstate="collapsed" desc="rascunhos">
-            //cad = xml.lerCadastros();
-
-            //qtdClientes = cliente.length;
-            /*
-            for (int i = 0; i <= cadastros.proximo; i++) {
-            try {
-            if(cliente[i]!=null){
-            qtdClientes = i;
-            }
-            } catch (NullPointerException e) {
-            System.out.println("Cliente com valor nulo - leituraInicial()");
-            } catch (ArrayIndexOutOfBoundsException x){
-            //System.out.println("Index do array é uma posicao inexistente - leiturainicial()");
-            }
-            }*/
-    //</editor-fold>
-
             System.out.println("> Dados de clientes carregados com sucesso.");
         } else {
             JOptionPane.showMessageDialog(this, "Não há clientes cadastrados.", "Erro!", JOptionPane.ERROR_MESSAGE);
@@ -359,23 +336,40 @@ public class Consulta extends javax.swing.JFrame {
     }
 //</editor-fold>
     
-    //<editor-fold defaultstate="collapsed" desc="preencherCampos()">
-    void preencherCampos(){
-        txtCadastros.setText(String.valueOf(ultimo+1));
+    //<editor-fold defaultstate="collapsed" desc="proximo()">
+    void proximo(){
+        if(atual<ultimo){
+            ++atual;
+        } else {
+            atual = 0;
+        }
+    }
+//</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="anterior()">
+    void anterior(){
+        if(atual>0){
+            --atual;
+        } else {
+            atual = ultimo;
+        }
+    }
+//</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="ultimoCliente(Cliente[] c)">
+    Cliente ultimoCliente(Cliente[] lista){
+        int ultimo = 0;
         
-        txtCod.setText(String.valueOf(cliente[atual].cod));
-        txtNome.setText(cliente[atual].nome);
-        txtCPF.setText(cliente[atual].cpf);
-        txtTel.setText(cliente[atual].telefone);
-        txtCidade.setText(cliente[atual].cidade);
-        txtEndereco.setText(cliente[atual].endereco);
-        txtEmail.setText(cliente[atual].email);
-        txtPrograma.setText(cliente[atual].programa);
-        txtDescricao.setText(cliente[atual].descricao);
+        for (int i = 0; i < lista.length; i++) {
+            // CHECA SE O CLIENTE DA POSIÇÃO I NÃO É NULO
+            if(lista[i]==null){
+                // RETORNA O CLIENTE ANTERIOR 
+                if(i!=0) ultimo = i-1;
+                break;
+            }
+        }
         
-        resetarBotoes();
-        selecBotaoPlataforma(cliente[atual].plataforma);
-        
+        return lista[ultimo];
     }
 //</editor-fold>
     
@@ -415,45 +409,25 @@ public class Consulta extends javax.swing.JFrame {
     }
 //</editor-fold>
     
-    //<editor-fold defaultstate="collapsed" desc="proximo()">
-    void proximo(){
-        if(atual<ultimo){
-            ++atual;
-        } else {
-            atual = 0;
-        }
-        //System.out.println("> Atual: "+atual);
-    }
-//</editor-fold>
-    
-    //<editor-fold defaultstate="collapsed" desc="anterior()">
-    void anterior(){
-        if(atual>0){
-            --atual;
-        } else {
-            atual = ultimo;
-        }
-        //System.out.println("> Atual: "+atual);
-    }
-//</editor-fold>
-    
-    //<editor-fold defaultstate="collapsed" desc="ultimoCliente(Cliente[] c)">
-    Cliente ultimoCliente(Cliente[] lista){
-        int ultimo = 0;
+    //<editor-fold defaultstate="collapsed" desc="preencherCampos()">
+    void preencherCampos(){
+        txtCadastros.setText(String.valueOf(ultimo+1));
         
-        for (int i = 0; i < lista.length; i++) {
-            // CHECA SE O CLIENTE DA POSIÇÃO I NÃO É NULO
-            if(lista[i]==null){
-                // RETORNA O CLIENTE ANTERIOR 
-                if(i!=0) ultimo = i-1;
-                break;
-            }
-        }
+        txtCod.setText(String.valueOf(cliente[atual].cod));
+        txtNome.setText(cliente[atual].nome);
+        txtCPF.setText(cliente[atual].cpf);
+        txtTel.setText(cliente[atual].telefone);
+        txtCidade.setText(cliente[atual].cidade);
+        txtEndereco.setText(cliente[atual].endereco);
+        txtEmail.setText(cliente[atual].email);
+        txtPrograma.setText(cliente[atual].programa);
+        txtDescricao.setText(cliente[atual].descricao);
         
-        return lista[ultimo];
+        resetarBotoes();
+        selecBotaoPlataforma(cliente[atual].plataforma);
+        
     }
 //</editor-fold>
-    
     
     // VERIFICA SE JÁ EXISTEM CLIENTES CADASTRADOS E RETORNA O VALOR COMO TRUE/FALSE
     public boolean haClientes(){
