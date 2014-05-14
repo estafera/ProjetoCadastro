@@ -456,16 +456,28 @@ public class Cadastro extends javax.swing.JFrame {
     }
 //</editor-fold>
     
-    //<editor-fold defaultstate="collapsed" desc="ultimoCliente()">
-    Cliente ultimoCliente(Cliente[] c){
-        int ultimo = 0;
-        for (int i = 0; i < c.length; i++) {
-            if(c[i]==null){
-                if(i!=0) ultimo = i-1;
+    //<editor-fold defaultstate="collapsed" desc="ultimoCliente(Cliente[] c)">
+    Cliente ultimoCliente(Cliente[] lista){
+        int ultimoCl = 0;
+        boolean haNulos = false;
+        
+        for (int i = 0; i < lista.length; i++) {
+            // CHECA SE O CLIENTE DA POSIÇÃO I NÃO É NULO
+            if(lista[i]==null){
+                haNulos=true;
+                // RETORNA O CLIENTE ANTERIOR 
+                if(i!=0) ultimoCl = i-1;
                 break;
             }
-        }        
-        return c[ultimo];
+        }
+        
+        // SE NÃO HÁ NULOS QUER DIZER QUE A NOSSA MATRIZ ESTÁ CHEIA
+        // E A ÚLTIMA POSIÇÃO É DE FATO A ÚLTIMA
+        if(!haNulos){
+            ultimoCl = lista.length-1;
+        }
+        
+        return lista[ultimoCl];
     }
 //</editor-fold>
     

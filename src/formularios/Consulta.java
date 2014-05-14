@@ -315,7 +315,7 @@ public class Consulta extends javax.swing.JFrame {
         
         if(haClientes()){
             ultimo = ultimoCliente(cliente).cod;
-            System.out.println("> Dados de clientes carregados com sucesso.");
+            System.out.println("> Dados de clientes carregados com sucesso.\n> leitInic - ultimo: "+ultimo);
         } else {
             JOptionPane.showMessageDialog(this, "Não há clientes cadastrados.", "Erro!", JOptionPane.ERROR_MESSAGE);
         }
@@ -358,18 +358,24 @@ public class Consulta extends javax.swing.JFrame {
     
     //<editor-fold defaultstate="collapsed" desc="ultimoCliente(Cliente[] c)">
     Cliente ultimoCliente(Cliente[] lista){
-        int ultimo = 0;
+        int ultimoCl = 0;
+        boolean haNulos = false;
         
         for (int i = 0; i < lista.length; i++) {
             // CHECA SE O CLIENTE DA POSIÇÃO I NÃO É NULO
             if(lista[i]==null){
+                haNulos=true;
                 // RETORNA O CLIENTE ANTERIOR 
-                if(i!=0) ultimo = i-1;
+                if(i!=0) ultimoCl = i-1;
                 break;
             }
         }
         
-        return lista[ultimo];
+        if(!haNulos){
+            ultimoCl = lista.length-1;
+        }
+        
+        return lista[ultimoCl];
     }
 //</editor-fold>
     

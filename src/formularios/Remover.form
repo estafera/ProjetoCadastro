@@ -67,7 +67,7 @@
                                   <Component id="lblPrograma" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="lblinf2" linkSize="3" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="0" pref="20" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="19" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="botaoRemover" min="-2" pref="105" max="-2" attributes="0"/>
@@ -79,7 +79,6 @@
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               <Component id="botaoVoltar" min="-2" pref="105" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="txtPlataforma" max="32767" attributes="0"/>
                           <Component id="txtEmail" max="32767" attributes="0"/>
                           <Component id="txtCidade" max="32767" attributes="0"/>
                           <Component id="txtEndereco" max="32767" attributes="0"/>
@@ -95,10 +94,19 @@
                           <Component id="jScrollPane2" alignment="1" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="txtCod" min="-2" pref="108" max="-2" attributes="0"/>
-                              <EmptySpace pref="77" max="32767" attributes="0"/>
+                              <EmptySpace pref="78" max="32767" attributes="0"/>
                               <Component id="botaoAnterior" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="botaoProximo" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="radioWeb" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                              <Component id="radioDesk" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="48" max="32767" attributes="0"/>
+                              <Component id="radioMobile" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                              <Component id="radioOutra" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -163,7 +171,12 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblPlataforma" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtPlataforma" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                      <Component id="radioWeb" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="radioDesk" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="radioMobile" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="radioOutra" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -350,11 +363,6 @@
         <Property name="requestFocusEnabled" type="boolean" value="false"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtPlataforma">
-      <Properties>
-        <Property name="editable" type="boolean" value="false"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator1">
     </Component>
     <Component class="javax.swing.JButton" name="botaoRemover">
@@ -364,6 +372,26 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoRemoverActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="radioWeb">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Web"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="radioDesk">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Desktop"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="radioMobile">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Mobile"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="radioOutra">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Outra"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

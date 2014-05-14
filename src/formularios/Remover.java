@@ -70,9 +70,12 @@ public class Remover extends javax.swing.JFrame {
         botaoAnterior = new javax.swing.JButton();
         lblCod = new javax.swing.JLabel();
         txtCod = new javax.swing.JTextField();
-        txtPlataforma = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         botaoRemover = new javax.swing.JButton();
+        radioWeb = new javax.swing.JRadioButton();
+        radioDesk = new javax.swing.JRadioButton();
+        radioMobile = new javax.swing.JRadioButton();
+        radioOutra = new javax.swing.JRadioButton();
 
         jButton1.setText("jButton1");
 
@@ -158,14 +161,20 @@ public class Remover extends javax.swing.JFrame {
         txtCod.setFocusable(false);
         txtCod.setRequestFocusEnabled(false);
 
-        txtPlataforma.setEditable(false);
-
         botaoRemover.setText("Remover");
         botaoRemover.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoRemoverActionPerformed(evt);
             }
         });
+
+        radioWeb.setText("Web");
+
+        radioDesk.setText("Desktop");
+
+        radioMobile.setText("Mobile");
+
+        radioOutra.setText("Outra");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -198,7 +207,7 @@ public class Remover extends javax.swing.JFrame {
                                     .addComponent(lblNome, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lblPrograma)
                                     .addComponent(lblinf2))
-                                .addGap(0, 20, Short.MAX_VALUE))
+                                .addGap(0, 19, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(botaoRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -206,7 +215,6 @@ public class Remover extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(botaoVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtPlataforma)
                             .addComponent(txtEmail)
                             .addComponent(txtCidade)
                             .addComponent(txtEndereco)
@@ -221,10 +229,18 @@ public class Remover extends javax.swing.JFrame {
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
                                 .addComponent(botaoAnterior)
                                 .addGap(18, 18, 18)
-                                .addComponent(botaoProximo)))))
+                                .addComponent(botaoProximo))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(radioWeb)
+                                .addGap(50, 50, 50)
+                                .addComponent(radioDesk)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                                .addComponent(radioMobile)
+                                .addGap(50, 50, 50)
+                                .addComponent(radioOutra)))))
                 .addContainerGap())
         );
 
@@ -278,7 +294,11 @@ public class Remover extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPlataforma)
-                    .addComponent(txtPlataforma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(radioWeb)
+                        .addComponent(radioDesk)
+                        .addComponent(radioMobile)
+                        .addComponent(radioOutra)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblDescricao)
@@ -308,15 +328,7 @@ public class Remover extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoProximoActionPerformed
 
     private void botaoRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoRemoverActionPerformed
-        remover();
-        try {
-            xml.salvarClientes(cliente);
-            JOptionPane.showMessageDialog(this, "> Cliente removido.");
-        } catch (IOException ex) {
-            Logger.getLogger(Remover.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        dispose();
-
+        confirmacaoRemover(evt);
     }//GEN-LAST:event_botaoRemoverActionPerformed
 
     //<editor-fold defaultstate="collapsed" desc="remover()">
@@ -332,21 +344,26 @@ public class Remover extends javax.swing.JFrame {
     }
 //</editor-fold>
 
-    //<editor-fold defaultstate="collapsed" desc="ultimoCliente()">
-    Cliente ultimoCliente(Cliente[] c) {
-        // ULTIMA POSIÇÃO QUE POSSUI UM CLIENTE NÃO NULO
-        int ultimaPos = 0;
-
-        for (int i = 0; i < c.length; i++) {
-            if (c[i] == null) {
-                if (i != 0) {
-                    ultimaPos = i - 1;
-                }
+    //<editor-fold defaultstate="collapsed" desc="ultimoCliente(Cliente[] c)">
+    Cliente ultimoCliente(Cliente[] lista){
+        int ultimoCl = 0;
+        boolean haNulos = false;
+        
+        for (int i = 0; i < lista.length; i++) {
+            // CHECA SE O CLIENTE DA POSIÇÃO I NÃO É NULO
+            if(lista[i]==null){
+                haNulos=true;
+                // RETORNA O CLIENTE ANTERIOR 
+                if(i!=0) ultimoCl = i-1;
                 break;
             }
         }
-
-        return c[ultimaPos];
+        
+        if(!haNulos){
+            ultimoCl = lista.length-1;
+        }
+        
+        return lista[ultimoCl];
     }
 //</editor-fold>
 
@@ -378,17 +395,52 @@ public class Remover extends javax.swing.JFrame {
         } catch (FileNotFoundException e) {
             System.out.println(">> Arquivo não encontrado. " + e);
         } catch (NullPointerException e){
-            System.out.println(">> Não há clientes cadastrados.");
+            System.out.println(">> Não há clientes cadastrados."+ e);
         }
         
     }
 //</editor-fold>
+        
+    //<editor-fold defaultstate="collapsed" desc="resetarBotoes">
+    void resetarBotoes(){
+        radioWeb.setSelected(false);
+        radioDesk.setSelected(false);
+        radioMobile.setSelected(false);
+        radioOutra.setSelected(false);
+        radioWeb.setEnabled(false);
+        radioMobile.setEnabled(false);
+        radioDesk.setEnabled(false);
+        radioOutra.setEnabled(false);
+    }
+//</editor-fold>
 
+    //<editor-fold defaultstate="collapsed" desc="selecBotaoPlataforma()">
+    void selecBotaoPlataforma(String p){
+        switch(p){
+            case "Web":
+                radioWeb.setEnabled(true);
+                radioWeb.setSelected(true);
+                break;
+            case "Desktop":
+                radioDesk.setEnabled(true);
+                radioDesk.setSelected(true);
+                break;
+            case "Mobile":
+                radioMobile.setEnabled(true);
+                radioMobile.setSelected(true);
+                break;
+            case "Outra":
+                radioOutra.setEnabled(true);
+                radioOutra.setSelected(true);
+                break;
+        }
+    }
+//</editor-fold>
+    
     //<editor-fold defaultstate="collapsed" desc="preencherCampos()">
-   void preencherCampos(){
+    void preencherCampos(){
         txtCadastros.setText(String.valueOf(ultimo+1));
         
-        //*********
         txtCod.setText(String.valueOf(cliente[atual].cod));
         txtNome.setText(cliente[atual].nome);
         txtCPF.setText(cliente[atual].cpf);
@@ -397,19 +449,20 @@ public class Remover extends javax.swing.JFrame {
         txtEndereco.setText(cliente[atual].endereco);
         txtEmail.setText(cliente[atual].email);
         txtPrograma.setText(cliente[atual].programa);
-        txtPlataforma.setText(cliente[atual].plataforma);
         txtDescricao.setText(cliente[atual].descricao);
+        
+        resetarBotoes();
+        selecBotaoPlataforma(cliente[atual].plataforma);
+        
     }
 //</editor-fold>
     
-    /**
-     *
-     * @return
-     */
-    public boolean haClientes(){
-        return cliente[0]!=null;
-    }
-
+    //<editor-fold defaultstate="collapsed" desc="haClientes()">
+   public boolean haClientes(){
+       return cliente[0]!=null;
+   }
+//</editor-fold>
+   
     //<editor-fold defaultstate="collapsed" desc="proximo()">
     void proximo() {
         if (atual < ultimo) {
@@ -429,6 +482,26 @@ public class Remover extends javax.swing.JFrame {
             atual = ultimo;
         }
         //System.out.println("> Atual: "+atual);
+    }
+//</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="confirmacaoRemover(java.awt.event.ActionEvent evt)">
+    void confirmacaoRemover(java.awt.event.ActionEvent evt){
+        Object opcoes[] = {"Sim", "Não"};
+        int o = JOptionPane.showOptionDialog(null, "Você tem certeza que "
+                + "deseja remover o cliente "+cliente[atual].nome+"?",
+                "Atenção!", WIDTH, WIDTH, null, opcoes, evt);
+        
+        if(o==0){
+            remover();
+            try {
+                xml.salvarClientes(cliente);
+                JOptionPane.showMessageDialog(null, "Cliente removido.");
+            } catch (IOException ex) {
+                Logger.getLogger(Remover.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            dispose();
+        }
     }
 //</editor-fold>
 
@@ -493,6 +566,10 @@ public class Remover extends javax.swing.JFrame {
     private javax.swing.JLabel lblTel;
     private javax.swing.JLabel lblinf1;
     private javax.swing.JLabel lblinf2;
+    private javax.swing.JRadioButton radioDesk;
+    private javax.swing.JRadioButton radioMobile;
+    private javax.swing.JRadioButton radioOutra;
+    private javax.swing.JRadioButton radioWeb;
     private javax.swing.JTextField txtCPF;
     public javax.swing.JTextField txtCadastros;
     private javax.swing.JTextField txtCidade;
@@ -501,7 +578,6 @@ public class Remover extends javax.swing.JFrame {
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtEndereco;
     private javax.swing.JTextField txtNome;
-    private javax.swing.JTextField txtPlataforma;
     private javax.swing.JTextField txtPrograma;
     private javax.swing.JTextField txtTel;
     // End of variables declaration//GEN-END:variables
