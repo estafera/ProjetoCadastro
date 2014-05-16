@@ -2,7 +2,6 @@ package formularios;
 
 import java.io.FileNotFoundException;
 import javax.swing.JOptionPane;
-import classes.Cadastros;
 import classes.Cliente;
 import classes.XML;
 
@@ -14,7 +13,6 @@ import classes.XML;
 public class Consulta extends javax.swing.JFrame {
     int ultimo = 0, atual = 0;
     Cliente[] cliente;
-    Cadastros cadastros = new Cadastros();
     String destino = "./src/arquivos/db/";
     XML xml = new XML(destino);
     
@@ -315,7 +313,7 @@ public class Consulta extends javax.swing.JFrame {
         
         if(haClientes()){
             ultimo = ultimoCliente(cliente).cod;
-            System.out.println("> Dados de clientes carregados com sucesso.\n> leitInic - ultimo: "+ultimo);
+            System.out.println("> Dados de clientes carregados com sucesso.");
         } else {
             JOptionPane.showMessageDialog(this, "Não há clientes cadastrados.", "Erro!", JOptionPane.ERROR_MESSAGE);
         }

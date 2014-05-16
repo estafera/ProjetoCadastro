@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import classes.Cadastros;
 import classes.Cliente;
 import classes.XML;
 
@@ -31,7 +30,6 @@ public class Editar extends javax.swing.JFrame {
 //</editor-fold>
     int qtdClientes = 0, atual = 0;
     Cliente[] cliente;
-    Cadastros cadastros = new Cadastros();
     String destino = "./src/arquivos/db/";
     XML xml = new XML(destino);
     

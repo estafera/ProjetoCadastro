@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import classes.Cadastros;
 import classes.Cliente;
 import classes.XML;
 
@@ -23,7 +22,6 @@ public class Remover extends javax.swing.JFrame {
     int ultimo = 0, atual = 0;
     boolean matrizVazia = false;
     Cliente[] cliente;
-    Cadastros cadastro = new Cadastros();
     String destino = "./src/arquivos/db/";
     XML xml = new XML(destino);
 

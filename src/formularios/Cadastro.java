@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import classes.Cadastros;
 import classes.Cliente;
 import classes.XML;
 
@@ -16,8 +15,7 @@ import classes.XML;
 //</editor-fold>
 
 public class Cadastro extends javax.swing.JFrame {
-    int incremento = 3, espacoMatriz = 0, atual = 0;
-    Cadastros cadastros = new Cadastros();
+    int incremento = 3, espacoVetor = 0, atual = 0;
     Cliente[] cliente;
     String destino = "./src/arquivos/db/";
     XML xml = new XML(destino);
@@ -344,10 +342,10 @@ public class Cadastro extends javax.swing.JFrame {
     }
 //</editor-fold>
     
-    //<editor-fold defaultstate="collapsed" desc="matrizCheia()">
-    boolean matrizCheia(){
-        if(atual>=espacoMatriz){
-            System.out.println("> Matriz atual cheia.");
+    //<editor-fold defaultstate="collapsed" desc="vetorCheio()">
+    boolean vetorCheio(){
+        if(atual>=espacoVetor){
+            System.out.println("> Vetor atual cheio.");
             return true;
         } else {
             return false;
@@ -355,48 +353,39 @@ public class Cadastro extends javax.swing.JFrame {
     }
 //</editor-fold>
 
-    //<editor-fold defaultstate="collapsed" desc="novaMatriz()">
-    Cliente[] novaMatriz() {
-        int novaQtd = espacoMatriz+incremento;
-        Cliente[] novaMatriz = new Cliente[novaQtd];
+    //<editor-fold defaultstate="collapsed" desc="função novoVetor()">
+    
+    // Função que será utilizada quando o vetor atual estiver cheio
+    Cliente[] novoVetor() {
+        //
+        int novaQtd = espacoVetor+incremento;
         
-        for (int i = 0; i < ultimoCliente(cliente).cod+1 ; i++) {
+        Cliente[] novoVetor = new Cliente[novaQtd];
+        
+        // Laço de repetição que copia os dados até o último cliente 
+        // em um novo vetor.
+        for (int i = 0; i <= ultimoCliente(cliente).cod; i++) {
             System.out.println("> Copiando informações do Cliente (cod "+i+
-                    ") para a nova matriz.");
+                    ") para o novo vetor.");
             
-            novaMatriz[i] = cliente[i];
-            System.out.println(">> novaMatriz["+i+"].nome = "+novaMatriz[i].nome);
-            
-            //<editor-fold defaultstate="collapsed" desc="modo manual">
-            /*
-            novaMatriz[i].cod = cliente[i].cod;
-            novaMatriz[i].nome = cliente[i].nome;
-            novaMatriz[i].cpf = cliente[i].cpf;
-            novaMatriz[i].telefone = cliente[i].telefone;
-            novaMatriz[i].cidade = cliente[i].cidade;
-            novaMatriz[i].endereco = cliente[i].endereco;
-            novaMatriz[i].email = cliente[i].email;
-            novaMatriz[i].programa = cliente[i].programa;
-            novaMatriz[i].plataforma = cliente[i].plataforma;
-            novaMatriz[i].descricao = cliente[i].descricao;*/
-//</editor-fold>
+            novoVetor[i] = cliente[i];
         }
         
-        espacoMatriz = novaQtd;
+        espacoVetor = novaQtd;
         
-        System.out.println("> Nova matriz criada."
-                + "\n> Quantidade de espaço na matriz: "+espacoMatriz
+        System.out.println("> Novo vetor de Cliente criado."
+                + "\n> Quantidade de espaço no vetor: "+espacoVetor
                 + "\n> Clientes cadastrados: "+ultimoCliente(cliente).cod
         );
         
-        return novaMatriz;
+        return novoVetor;
     }
 //</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc="cadastrar()">
     void cadastrar(){
-        if(matrizCheia()){
-            cliente = (Cliente[]) novaMatriz();
+        if(vetorCheio()){
+            cliente = (Cliente[]) novoVetor();
         }
         
         // INSTANCIANDO UM OBJETO DA CLASSE CLIENTE
@@ -430,12 +419,11 @@ public class Cadastro extends javax.swing.JFrame {
     //<editor-fold defaultstate="collapsed" desc="leituraInicial()">
     void leituraInicial() throws FileNotFoundException{
         cliente = xml.lerClientes();
-        espacoMatriz = cliente.length;
+        espacoVetor = cliente.length;
         if(haClientes()) {
             atual = ultimoCliente(cliente).cod+1;
 
-            System.out.println("> Dados de clientes carregados com sucesso."
-            );
+            System.out.println("> Dados de clientes carregados com sucesso.");
         }  else {
             atual = 0;
         }
