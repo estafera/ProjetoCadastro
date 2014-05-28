@@ -7,7 +7,7 @@ import classes.XML;
 
 //<editor-fold defaultstate="collapsed" desc="Desenvolvedores">
 /*
- * @authors Ramon Honorio, Maikon Evangelista, João Paulo Silva
+ * @authors Ramon Honorio, Maikon Evangelista
  */
 //</editor-fold>
 public class Consulta extends javax.swing.JFrame {
@@ -58,7 +58,6 @@ public class Consulta extends javax.swing.JFrame {
         lblEmail = new javax.swing.JLabel();
         botaoVoltar = new javax.swing.JButton();
         labelClientesCad = new javax.swing.JLabel();
-        txtCadastros = new javax.swing.JTextField();
         botaoProximo = new javax.swing.JButton();
         botaoAnterior = new javax.swing.JButton();
         lblCod = new javax.swing.JLabel();
@@ -68,6 +67,9 @@ public class Consulta extends javax.swing.JFrame {
         radioMobile = new javax.swing.JRadioButton();
         radioDesk = new javax.swing.JRadioButton();
         radioWeb = new javax.swing.JRadioButton();
+        lblData = new javax.swing.JLabel();
+        txtData = new javax.swing.JLabel();
+        txtCadastros = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Consulta");
@@ -126,11 +128,6 @@ public class Consulta extends javax.swing.JFrame {
 
         labelClientesCad.setText("Clientes cadastrados: ");
 
-        txtCadastros.setEditable(false);
-        txtCadastros.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtCadastros.setFocusable(false);
-        txtCadastros.setRequestFocusEnabled(false);
-
         botaoProximo.setText("Próximo >");
         botaoProximo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -160,23 +157,28 @@ public class Consulta extends javax.swing.JFrame {
 
         radioWeb.setText("Web");
 
+        lblData.setText("Cadastro realizado em");
+
+        txtData.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        txtData.setText("28/05/2014 às 11:02");
+
+        txtCadastros.setText("0");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(labelClientesCad)
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(txtCadastros, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(203, 203, 203))
+                        .addGap(33, 33, 33)
+                        .addComponent(txtCadastros, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(203, 309, Short.MAX_VALUE))
                     .addComponent(jSeparator1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblinf1)
-                            .addComponent(lblCod))
+                        .addComponent(lblCod)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -191,7 +193,7 @@ public class Consulta extends javax.swing.JFrame {
                                     .addComponent(lblNome, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lblPrograma)
                                     .addComponent(lblinf2))
-                                .addGap(0, 16, Short.MAX_VALUE)))
+                                .addGap(0, 25, Short.MAX_VALUE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtEmail)
                             .addComponent(txtCidade)
@@ -199,30 +201,37 @@ public class Consulta extends javax.swing.JFrame {
                             .addComponent(txtNome)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblTel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtTel, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblTel)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtTel, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txtPrograma, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(botaoAnterior)
-                                .addGap(18, 18, 18)
-                                .addComponent(botaoProximo))
+                                .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(52, 52, 52)
+                                .addComponent(lblData)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtData)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(radioWeb)
                                 .addGap(50, 50, 50)
                                 .addComponent(radioDesk)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                                 .addComponent(radioMobile)
                                 .addGap(50, 50, 50)
                                 .addComponent(radioOutra))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(botaoVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addComponent(botaoVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblinf1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(botaoAnterior)
+                        .addGap(18, 18, 18)
+                        .addComponent(botaoProximo)))
+                .addGap(20, 20, 20))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {lblinf1, lblinf2});
@@ -230,20 +239,24 @@ public class Consulta extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCadastros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelClientesCad))
+                    .addComponent(labelClientesCad)
+                    .addComponent(txtCadastros))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblinf1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(botaoProximo)
+                        .addComponent(botaoAnterior))
+                    .addComponent(lblinf1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCod)
                     .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botaoProximo)
-                    .addComponent(botaoAnterior))
+                    .addComponent(lblData)
+                    .addComponent(txtData))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNome)
@@ -418,6 +431,8 @@ public class Consulta extends javax.swing.JFrame {
         txtCadastros.setText(String.valueOf(ultimo+1));
         
         txtCod.setText(String.valueOf(cliente[atual].cod));
+        txtData.setText(cliente[atual].data);
+        
         txtNome.setText(cliente[atual].nome);
         txtCPF.setText(cliente[atual].cpf);
         txtTel.setText(cliente[atual].telefone);
@@ -482,6 +497,7 @@ public class Consulta extends javax.swing.JFrame {
     private javax.swing.JLabel labelClientesCad;
     private javax.swing.JLabel lblCidade;
     private javax.swing.JLabel lblCod;
+    private javax.swing.JLabel lblData;
     private javax.swing.JLabel lblDescricao;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblEndereco;
@@ -497,9 +513,10 @@ public class Consulta extends javax.swing.JFrame {
     private javax.swing.JRadioButton radioOutra;
     private javax.swing.JRadioButton radioWeb;
     private javax.swing.JTextField txtCPF;
-    private javax.swing.JTextField txtCadastros;
+    private javax.swing.JLabel txtCadastros;
     private javax.swing.JTextField txtCidade;
     private javax.swing.JTextField txtCod;
+    private javax.swing.JLabel txtData;
     private javax.swing.JTextArea txtDescricao;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtEndereco;

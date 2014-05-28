@@ -10,11 +10,14 @@ import java.io.Serializable;
 
 //<editor-fold defaultstate="collapsed" desc="Desenvolvedores">
 /*
- * @authors Ramon Honorio, Maikon Evangelista, João Paulo Silva
+ * @authors Ramon Honorio, Maikon Evangelista
  */
 //</editor-fold>
 public class Cliente {
     public int cod; // -- Código do cliente
+    
+    // -- Data de cadastramento
+    public String data;
     
     // -- Inf do cliente
     public String nome;

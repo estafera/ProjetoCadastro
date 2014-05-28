@@ -10,7 +10,7 @@ import classes.XML;
 
 //<editor-fold defaultstate="collapsed" desc="Desenvolvedores">
 /*
- * @authors Ramon Honorio, Maikon Evangelista, João Paulo Silva
+ * @authors Ramon Honorio, Maikon Evangelista
  */
 //</editor-fold>
 public class Editar extends javax.swing.JFrame {
@@ -66,7 +66,6 @@ public class Editar extends javax.swing.JFrame {
         lblEmail = new javax.swing.JLabel();
         botaoVoltar = new javax.swing.JButton();
         labelClientesCad = new javax.swing.JLabel();
-        txtCadastros = new javax.swing.JTextField();
         botaoProximo = new javax.swing.JButton();
         botaoAnterior = new javax.swing.JButton();
         lblCod = new javax.swing.JLabel();
@@ -77,6 +76,9 @@ public class Editar extends javax.swing.JFrame {
         radioDesk = new javax.swing.JRadioButton();
         radioMobile = new javax.swing.JRadioButton();
         radioOutra = new javax.swing.JRadioButton();
+        txtData = new javax.swing.JLabel();
+        lblData = new javax.swing.JLabel();
+        txtCadastros = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Editar");
@@ -122,11 +124,6 @@ public class Editar extends javax.swing.JFrame {
 
         labelClientesCad.setText("Clientes cadastrados: ");
 
-        txtCadastros.setEditable(false);
-        txtCadastros.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtCadastros.setFocusable(false);
-        txtCadastros.setRequestFocusEnabled(false);
-
         botaoProximo.setText("Próximo >");
         botaoProximo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -168,23 +165,28 @@ public class Editar extends javax.swing.JFrame {
         bGrupoPlataforma.add(radioOutra);
         radioOutra.setText("Outra");
 
+        txtData.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        txtData.setText("28/05/2014 às 11:02");
+
+        lblData.setText("Cadastro realizado em");
+
+        txtCadastros.setText("0");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(labelClientesCad)
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(txtCadastros, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(203, 203, 203))
+                        .addGap(27, 27, 27)
+                        .addComponent(txtCadastros, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jSeparator1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblinf1)
-                            .addComponent(lblCod))
+                        .addComponent(lblCod)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -199,10 +201,10 @@ public class Editar extends javax.swing.JFrame {
                                     .addComponent(lblNome, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lblPrograma)
                                     .addComponent(lblinf2))
-                                .addGap(0, 20, Short.MAX_VALUE))
+                                .addGap(0, 23, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(botaoSalvar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
@@ -221,19 +223,25 @@ public class Editar extends javax.swing.JFrame {
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
-                                .addComponent(botaoAnterior)
-                                .addGap(18, 18, 18)
-                                .addComponent(botaoProximo))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblData)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtData))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(radioWeb)
                                 .addGap(52, 52, 52)
                                 .addComponent(radioDesk)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                                 .addComponent(radioMobile)
                                 .addGap(42, 42, 42)
-                                .addComponent(radioOutra)))))
-                .addContainerGap())
+                                .addComponent(radioOutra))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblinf1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(botaoAnterior)
+                        .addGap(18, 18, 18)
+                        .addComponent(botaoProximo)))
+                .addGap(20, 20, 20))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {lblinf1, lblinf2});
@@ -243,20 +251,25 @@ public class Editar extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCadastros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelClientesCad))
+                    .addComponent(labelClientesCad)
+                    .addComponent(txtCadastros))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblinf1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblinf1)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(botaoProximo)
+                        .addComponent(botaoAnterior)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCod)
                     .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botaoProximo)
-                    .addComponent(botaoAnterior))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblData)
+                        .addComponent(txtData)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNome)
@@ -301,7 +314,7 @@ public class Editar extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botaoVoltar)
                     .addComponent(botaoSalvar))
-                .addContainerGap())
+                .addGap(20, 20, 20))
         );
 
         pack();
@@ -374,6 +387,8 @@ public class Editar extends javax.swing.JFrame {
     void preencherCampos(){
         txtCadastros.setText(String.valueOf(qtdClientes+1));
         txtCod.setText(String.valueOf(cliente[atual].cod));
+        txtData.setText(cliente[atual].data);
+        
         txtNome.setText(cliente[atual].nome);
         txtCPF.setText(cliente[atual].cpf);
         txtTel.setText(cliente[atual].telefone);
@@ -541,6 +556,7 @@ public class Editar extends javax.swing.JFrame {
     private javax.swing.JLabel labelClientesCad;
     private javax.swing.JLabel lblCidade;
     private javax.swing.JLabel lblCod;
+    private javax.swing.JLabel lblData;
     private javax.swing.JLabel lblDescricao;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblEndereco;
@@ -556,9 +572,10 @@ public class Editar extends javax.swing.JFrame {
     private javax.swing.JRadioButton radioOutra;
     private javax.swing.JRadioButton radioWeb;
     private javax.swing.JTextField txtCPF;
-    private javax.swing.JTextField txtCadastros;
+    private javax.swing.JLabel txtCadastros;
     private javax.swing.JTextField txtCidade;
     private javax.swing.JTextField txtCod;
+    private javax.swing.JLabel txtData;
     private javax.swing.JTextArea txtDescricao;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtEndereco;

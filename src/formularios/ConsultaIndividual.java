@@ -1,9 +1,6 @@
 package formularios;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import classes.Cliente;
 import classes.XML;
@@ -13,19 +10,14 @@ import classes.XML;
  * @authors Ramon Honorio, Maikon Evangelista
  */
 //</editor-fold>
-public class Remover extends javax.swing.JFrame {
-    int ultimo = 0, atual = 0;
-    boolean matrizVazia = false;
+public class ConsultaIndividual extends javax.swing.JFrame {
+    public int ultimo = 0, atual = 2;
     Cliente[] cliente;
     String destino = "./src/arquivos/db/";
     XML xml = new XML(destino);
-
-    //<editor-fold defaultstate="collapsed" desc="método construtor Remover()">
-
-    /**
-     *
-     */
-        public Remover() {
+    
+    //<editor-fold defaultstate="collapsed" desc="método construtor Consulta()">
+    public ConsultaIndividual() {
         inicializar();
     }
 //</editor-fold>
@@ -35,7 +27,6 @@ public class Remover extends javax.swing.JFrame {
     private void initComponents() {
 
         bGrupoPlataforma = new javax.swing.ButtonGroup();
-        jButton1 = new javax.swing.JButton();
         lblNome = new javax.swing.JLabel();
         lblIdade = new javax.swing.JLabel();
         lblDescricao = new javax.swing.JLabel();
@@ -57,25 +48,17 @@ public class Remover extends javax.swing.JFrame {
         txtEmail = new javax.swing.JTextField();
         lblEmail = new javax.swing.JLabel();
         botaoVoltar = new javax.swing.JButton();
-        labelClientesCad = new javax.swing.JLabel();
-        botaoProximo = new javax.swing.JButton();
-        botaoAnterior = new javax.swing.JButton();
         lblCod = new javax.swing.JLabel();
         txtCod = new javax.swing.JTextField();
-        jSeparator1 = new javax.swing.JSeparator();
-        botaoRemover = new javax.swing.JButton();
-        radioWeb = new javax.swing.JRadioButton();
-        radioDesk = new javax.swing.JRadioButton();
-        radioMobile = new javax.swing.JRadioButton();
         radioOutra = new javax.swing.JRadioButton();
-        lblData = new javax.swing.JLabel();
+        radioMobile = new javax.swing.JRadioButton();
+        radioDesk = new javax.swing.JRadioButton();
+        radioWeb = new javax.swing.JRadioButton();
         txtData = new javax.swing.JLabel();
-        txtCadastros = new javax.swing.JLabel();
-
-        jButton1.setText("jButton1");
+        lblData = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Remover");
+        setTitle("Consulta");
 
         lblNome.setText("Nome:");
 
@@ -129,22 +112,6 @@ public class Remover extends javax.swing.JFrame {
             }
         });
 
-        labelClientesCad.setText("Clientes cadastrados: ");
-
-        botaoProximo.setText("Próximo >");
-        botaoProximo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoProximoActionPerformed(evt);
-            }
-        });
-
-        botaoAnterior.setText("< Anterior");
-        botaoAnterior.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoAnteriorActionPerformed(evt);
-            }
-        });
-
         lblCod.setText("Codigo do cliente:");
 
         txtCod.setEditable(false);
@@ -152,27 +119,18 @@ public class Remover extends javax.swing.JFrame {
         txtCod.setFocusable(false);
         txtCod.setRequestFocusEnabled(false);
 
-        botaoRemover.setText("Remover");
-        botaoRemover.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoRemoverActionPerformed(evt);
-            }
-        });
-
-        radioWeb.setText("Web");
-
-        radioDesk.setText("Desktop");
+        radioOutra.setText("Outra");
 
         radioMobile.setText("Mobile");
 
-        radioOutra.setText("Outra");
+        radioDesk.setText("Desktop");
 
-        lblData.setText("Cadastro realizado em");
+        radioWeb.setText("Web");
 
         txtData.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         txtData.setText("28/05/2014 às 11:02");
 
-        txtCadastros.setText("0");
+        lblData.setText("Cadastro realizado em");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -181,7 +139,11 @@ public class Remover extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblinf1)
+                            .addComponent(lblCod))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblIdade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -195,14 +157,8 @@ public class Remover extends javax.swing.JFrame {
                                     .addComponent(lblNome, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lblPrograma)
                                     .addComponent(lblinf2))
-                                .addGap(0, 22, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(botaoRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGap(0, 20, Short.MAX_VALUE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(botaoVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txtEmail)
                             .addComponent(txtCidade)
                             .addComponent(txtEndereco)
@@ -225,24 +181,13 @@ public class Remover extends javax.swing.JFrame {
                                 .addComponent(radioWeb)
                                 .addGap(50, 50, 50)
                                 .addComponent(radioDesk)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                                 .addComponent(radioMobile)
                                 .addGap(50, 50, 50)
                                 .addComponent(radioOutra))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblinf1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(botaoAnterior)
-                        .addGap(18, 18, 18)
-                        .addComponent(botaoProximo))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(labelClientesCad)
-                                .addGap(31, 31, 31)
-                                .addComponent(txtCadastros, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(lblCod))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(botaoVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(20, 20, 20))
         );
 
@@ -250,27 +195,16 @@ public class Remover extends javax.swing.JFrame {
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(lblinf1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelClientesCad)
-                    .addComponent(txtCadastros))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(botaoProximo)
-                        .addComponent(botaoAnterior))
-                    .addComponent(lblinf1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblCod)
+                    .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lblData)
-                        .addComponent(txtData))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblCod)
-                        .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtData)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNome)
@@ -299,7 +233,7 @@ public class Remover extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtPrograma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblPrograma))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(radioWeb)
@@ -312,9 +246,7 @@ public class Remover extends javax.swing.JFrame {
                     .addComponent(lblDescricao)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botaoVoltar)
-                    .addComponent(botaoRemover))
+                .addComponent(botaoVoltar)
                 .addGap(20, 20, 20))
         );
 
@@ -322,36 +254,57 @@ public class Remover extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoVoltarActionPerformed
+        // DISPOSE: FUNÇÃO QUE FECHA A JANELA (DESTA CLASSE)
         dispose();
     }//GEN-LAST:event_botaoVoltarActionPerformed
 
-    private void botaoAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAnteriorActionPerformed
-        anterior();
-        preencherCampos();
-    }//GEN-LAST:event_botaoAnteriorActionPerformed
-
-    private void botaoProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoProximoActionPerformed
-        proximo();
-        preencherCampos();
-    }//GEN-LAST:event_botaoProximoActionPerformed
-
-    private void botaoRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoRemoverActionPerformed
-        confirmacaoRemover(evt);
-    }//GEN-LAST:event_botaoRemoverActionPerformed
-
-    //<editor-fold defaultstate="collapsed" desc="remover()">
-    void remover() {
-        for (int i = atual; i < ultimo; i++) {
-            int j = i + 1;
-            cliente[i] = cliente[j];
-            cliente[i].cod--;
+    //<editor-fold defaultstate="collapsed" desc="leituraInicial()">
+    void leituraInicial() throws FileNotFoundException{
+        cliente = xml.lerClientes();
+        
+        if(haClientes()){
+            //ultimo = ultimoCliente(cliente).cod;
+            System.out.println("> Dados do cliente "+cliente[atual].nome+" carregados com sucesso.");
+        } else {
+            JOptionPane.showMessageDialog(this, "Não há clientes cadastrados.", "Erro!", JOptionPane.ERROR_MESSAGE);
         }
-
-        cliente[ultimo] = null;
-        atual = ultimo - 1;
     }
 //</editor-fold>
-
+    
+    //<editor-fold defaultstate="collapsed" desc="inicializar()">
+    public void inicializar(){
+        try {
+            leituraInicial();
+            initComponents();
+            preencherCampos();
+        } catch(FileNotFoundException e){
+            System.out.println("Arquivo não encontrado "+e);
+        } catch (NullPointerException e){
+            System.out.println(">> Não há clientes cadastrados.");
+        }
+    }
+//</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="proximo()">
+    void proximo(){
+        if(atual<ultimo){
+            ++atual;
+        } else {
+            atual = 0;
+        }
+    }
+//</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="anterior()">
+    void anterior(){
+        if(atual>0){
+            --atual;
+        } else {
+            atual = ultimo;
+        }
+    }
+//</editor-fold>
+    
     //<editor-fold defaultstate="collapsed" desc="ultimoCliente(Cliente[] c)">
     Cliente ultimoCliente(Cliente[] lista){
         int ultimoCl = 0;
@@ -374,41 +327,7 @@ public class Remover extends javax.swing.JFrame {
         return lista[ultimoCl];
     }
 //</editor-fold>
-
-    //<editor-fold defaultstate="collapsed" desc="leituraInicial()">
-    void leituraInicial() throws FileNotFoundException {
-        cliente = xml.lerClientes();
-        
-        if (haClientes()) {
-            ultimo = ultimoCliente(cliente).cod;
-            atual = 0;
-        } else {
-            JOptionPane.showMessageDialog(this, "Não há clientes cadastrados.", "Erro!", JOptionPane.ERROR_MESSAGE);
-        }
-        
-    }
-//</editor-fold>
-
-    //<editor-fold defaultstate="collapsed" desc="inicializar()">
-
-    /**
-     *
-     */
-        public void inicializar() {
-        
-        try {
-            leituraInicial();
-            initComponents();
-            preencherCampos();
-        } catch (FileNotFoundException e) {
-            System.out.println(">> Arquivo não encontrado. " + e);
-        } catch (NullPointerException e){
-            System.out.println(">> Não há clientes cadastrados."+ e);
-        }
-        
-    }
-//</editor-fold>
-        
+    
     //<editor-fold defaultstate="collapsed" desc="resetarBotoes">
     void resetarBotoes(){
         radioWeb.setSelected(false);
@@ -421,7 +340,7 @@ public class Remover extends javax.swing.JFrame {
         radioOutra.setEnabled(false);
     }
 //</editor-fold>
-
+    
     //<editor-fold defaultstate="collapsed" desc="selecBotaoPlataforma()">
     void selecBotaoPlataforma(String p){
         switch(p){
@@ -447,7 +366,7 @@ public class Remover extends javax.swing.JFrame {
     
     //<editor-fold defaultstate="collapsed" desc="preencherCampos()">
     void preencherCampos(){
-        txtCadastros.setText(String.valueOf(ultimo+1));
+        //txtCadastros.setText(String.valueOf(ultimo+1));
         
         txtCod.setText(String.valueOf(cliente[atual].cod));
         txtData.setText(cliente[atual].data);
@@ -467,66 +386,18 @@ public class Remover extends javax.swing.JFrame {
     }
 //</editor-fold>
     
-    //<editor-fold defaultstate="collapsed" desc="haClientes()">
-   public boolean haClientes(){
-       return cliente[0]!=null;
-   }
-//</editor-fold>
-   
-    //<editor-fold defaultstate="collapsed" desc="proximo()">
-    void proximo() {
-        if (atual < ultimo) {
-            ++atual;
-        } else {
-            atual = 0;
-        }
-        //System.out.println("> Atual: "+atual);
+    // VERIFICA SE JÁ EXISTEM CLIENTES CADASTRADOS E RETORNA O VALOR COMO TRUE/FALSE
+    public boolean haClientes(){
+        return cliente[0]!=null;
     }
-//</editor-fold>
-
-    //<editor-fold defaultstate="collapsed" desc="anterior()">
-    void anterior() {
-        if (atual > 0) {
-            --atual;
-        } else {
-            atual = ultimo;
-        }
-        //System.out.println("> Atual: "+atual);
-    }
-//</editor-fold>
     
-    //<editor-fold defaultstate="collapsed" desc="confirmacaoRemover(java.awt.event.ActionEvent evt)">
-    void confirmacaoRemover(java.awt.event.ActionEvent evt){
-        Object opcoes[] = {"Sim", "Não"};
-        int o = JOptionPane.showOptionDialog(null, "Você tem certeza que "
-                + "deseja remover o cliente "+cliente[atual].nome+"?",
-                "Atenção!", WIDTH, WIDTH, null, opcoes, evt);
-        
-        if(o==0){
-            remover();
-            try {
-                xml.salvarClientes(cliente);
-                JOptionPane.showMessageDialog(null, "Cliente removido.");
-            } catch (IOException ex) {
-                Logger.getLogger(Remover.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            dispose();
-        }
-    }
-//</editor-fold>
-
     //<editor-fold defaultstate="collapsed" desc="Método Main()">
-
-    /**
-     *
-     * @param args
-     */
-        public static void main(String args[]) {
+    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
+        * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+        */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -535,20 +406,20 @@ public class Remover extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Remover.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultaIndividual.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Remover.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultaIndividual.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Remover.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultaIndividual.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Remover.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultaIndividual.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Remover().setVisible(true);
+                new ConsultaIndividual().setVisible(true);
             }
         });
     }
@@ -556,14 +427,8 @@ public class Remover extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bGrupoPlataforma;
-    private javax.swing.JButton botaoAnterior;
-    private javax.swing.JButton botaoProximo;
-    private javax.swing.JButton botaoRemover;
     private javax.swing.JButton botaoVoltar;
-    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JLabel labelClientesCad;
     private javax.swing.JLabel lblCidade;
     private javax.swing.JLabel lblCod;
     private javax.swing.JLabel lblData;
@@ -582,7 +447,6 @@ public class Remover extends javax.swing.JFrame {
     private javax.swing.JRadioButton radioOutra;
     private javax.swing.JRadioButton radioWeb;
     private javax.swing.JTextField txtCPF;
-    private javax.swing.JLabel txtCadastros;
     private javax.swing.JTextField txtCidade;
     private javax.swing.JTextField txtCod;
     private javax.swing.JLabel txtData;

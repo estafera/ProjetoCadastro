@@ -6,8 +6,11 @@
 package formularios;
 
 //<editor-fold defaultstate="collapsed" desc="Desenvolvedores">
+
+import javax.swing.JOptionPane;
+
 /*
- * @authors Ramon Honorio, Maikon Evangelista, João Paulo Silva
+ * @authors Ramon Honorio, Maikon Evangelista
  */
 //</editor-fold>
 public class FormPrincipal extends javax.swing.JFrame {
@@ -16,6 +19,7 @@ public class FormPrincipal extends javax.swing.JFrame {
     Remover remover;
     Editar editar;
     Consulta consulta;
+    ConsultaIndividual individual;
     
     //<editor-fold defaultstate="collapsed" desc="Construtor FormPrincipal()">
     public FormPrincipal() {
@@ -167,8 +171,30 @@ public class FormPrincipal extends javax.swing.JFrame {
 
     private void botaoConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoConsultaActionPerformed
         // TODO add your handling code here:
-        criarConsulta();
+        
+        //criarConsulta();
+        escolherConsulta();
+        
     }//GEN-LAST:event_botaoConsultaActionPerformed
+    
+    public int opcoesConsulta(){
+        Object[] op = {"Consulta Geral", "Pesquisar um único cliente"};
+        
+        return JOptionPane.showOptionDialog(null, "Escolha qual tipo de consulta deseja realizar:", "Consulta", 
+                0, 1, null, op, op);
+    }
+    
+    public void escolherConsulta(){
+        switch(opcoesConsulta()){
+            case 0:
+                criarConsulta();
+                break;
+            case 1:
+                
+                break;
+        }
+        
+    }
     
     public void criarConsulta(){
         consulta = new Consulta();
@@ -176,6 +202,14 @@ public class FormPrincipal extends javax.swing.JFrame {
             consulta.setVisible(true);
         else
             consulta = null;
+    }
+    
+    public void criarConsIndividual(){
+        individual = new ConsultaIndividual();
+        if(individual.haClientes())
+            individual.setVisible(true);
+        else
+            individual = null;
     }
     
     public void criarEditar(){

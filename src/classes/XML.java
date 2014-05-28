@@ -18,7 +18,7 @@ import java.io.OutputStream;
 
 //<editor-fold defaultstate="collapsed" desc="Desenvolvedores">
 /*
- * @authors Ramon Honorio, Maikon Evangelista, João Paulo Silva
+ * @authors Ramon Honorio, Maikon Evangelista
  */
 //</editor-fold>
 public class XML {
@@ -52,6 +52,7 @@ public class XML {
         
         cliente[0] = new Cliente();
         cliente[0].cod = 0;
+        cliente[0].data = "05/04/2014 04:30";
         cliente[0].nome = "Ramon Honorio";
         cliente[0].cpf = "12345678900";
         cliente[0].endereco = "Rua qualquer, 86";
@@ -66,6 +67,7 @@ public class XML {
         //---------------
         cliente[1] = new Cliente();
         cliente[1].cod = 1;
+        cliente[1].data = "15/04/2014 15:21";
         cliente[1].nome = "Sakata Gintoki";
         cliente[1].cpf = "98765432100";
         cliente[1].endereco = "Distrito Kabuki, 264";
@@ -121,6 +123,7 @@ public class XML {
                 System.out.println(
                         "==============\n"
                         + "Cod Cliente: "+cliente[i].cod+"\n"
+                        + "Data de Cadastramento: "+cliente[i].data+"\n"
                         + "Nome: "+cliente[i].nome+"\n"
                         + "CPF: "+cliente[i].cpf+"\n"
                         + "Tel: "+cliente[i].telefone+"\n"

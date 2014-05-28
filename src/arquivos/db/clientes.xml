@@ -1,6 +1,7 @@
 <Cliente-array>
   <Cliente>
     <cod>0</cod>
+    <data>05/04/2014 às 04:30</data>
     <nome>Ramon Honorio</nome>
     <cpf>12345678900</cpf>
     <telefone>1166123552</telefone>
@@ -13,6 +14,7 @@
   </Cliente>
   <Cliente>
     <cod>1</cod>
+    <data>15/04/2014 às 15:21</data>
     <nome>Sakata Gintoki</nome>
     <cpf>98765432100</cpf>
     <telefone>948461262</telefone>
@@ -25,45 +27,16 @@
   </Cliente>
   <Cliente>
     <cod>2</cod>
-    <nome>Adalberto Adamastor</nome>
-    <cpf>15998745630</cpf>
-    <telefone>1189597423</telefone>
-    <cidade>Palmas/TO</cidade>
-    <endereco>Quadra 603 Norte Alameda 10</endereco>
-    <email>adalb.ada1978@yahoo.com.br</email>
-    <programa>GPS para android</programa>
-    <plataforma>Outra</plataforma>
-    <descricao>Fazer um app divertido de mapeamento, trânsito e navegação baseado em uma comunidade. 
-Milhões de motoristas de todo o mundo unem forças para escapar do trânsito, poupar tempo, 
-dinheiro do combustível e melhorar o percurso diário de todos.
-Simplesmente dirigindo com o Waze aberto você já contribui com informações de trânsito das vias 
-para sua comunidade local. Você também pode ativamente alertar sobre acidentes, perigos, polícia e outros eventos que encontrar na via, 
-e pode receber alertas que surjam na sua rota. Descubra o posto de combustível mais barato em sua rota com os preços atualizados pela comunidade. 
-Algo que também torne simples e divertido encontrar seus amigos por aí.</descricao>
-  </Cliente>
-  <Cliente>
-    <cod>3</cod>
-    <nome>4</nome>
-    <cpf></cpf>
-    <telefone></telefone>
-    <cidade></cidade>
-    <endereco></endereco>
-    <email></email>
-    <programa></programa>
-    <plataforma>Web</plataforma>
-    <descricao></descricao>
-  </Cliente>
-  <Cliente>
-    <cod>4</cod>
-    <nome>5</nome>
-    <cpf></cpf>
-    <telefone></telefone>
-    <cidade></cidade>
-    <endereco></endereco>
-    <email></email>
-    <programa></programa>
-    <plataforma>Web</plataforma>
-    <descricao></descricao>
+    <data>28/05/2014 às 12:32</data>
+    <nome>Meu Terceiro Cliente</nome>
+    <cpf>5619419</cpf>
+    <telefone>41919</telefone>
+    <cidade>8198189</cidade>
+    <endereco>89191</endereco>
+    <email>8919</email>
+    <programa>19</programa>
+    <plataforma>Desktop</plataforma>
+    <descricao>9819819189</descricao>
   </Cliente>
   <null/>
   <null/>

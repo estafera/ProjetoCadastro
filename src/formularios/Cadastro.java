@@ -7,13 +7,14 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import classes.Cliente;
 import classes.XML;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 //<editor-fold defaultstate="collapsed" desc="Desenvolvedores">
 /*
- * @authors Ramon Honorio, Maikon Evangelista, João Paulo Silva
+ * @authors Ramon Honorio, Maikon Evangelista
  */
 //</editor-fold>
-
 public class Cadastro extends javax.swing.JFrame {
     int incremento = 3, espacoVetor = 0, atual = 0;
     Cliente[] cliente;
@@ -382,6 +383,15 @@ public class Cadastro extends javax.swing.JFrame {
     }
 //</editor-fold>
     
+    String dataAtual(){
+        Date date = new Date();
+        SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
+        String s = f.format(date);
+        f = new SimpleDateFormat("HH:mm");
+        s = s+" às "+f.format(date);
+        return s;
+    }
+    
     //<editor-fold defaultstate="collapsed" desc="cadastrar()">
     void cadastrar(){
         if(vetorCheio()){
@@ -392,6 +402,9 @@ public class Cadastro extends javax.swing.JFrame {
         cliente[atual] = new Cliente();
         
         cliente[atual].cod = atual;
+        
+        cliente[atual].data = dataAtual();
+        
         cliente[atual].nome = txtNome.getText();
         cliente[atual].cpf = txtCPF.getText();
         cliente[atual].telefone = txtTel.getText();
