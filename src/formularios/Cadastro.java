@@ -127,7 +127,7 @@ public class Cadastro extends javax.swing.JFrame {
 
         lblEmail.setText("Email:");
 
-        botaoConsulta.setText("Consulta");
+        botaoConsulta.setText("Listar Clientes");
         botaoConsulta.setEnabled(false);
         botaoConsulta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

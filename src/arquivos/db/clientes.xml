@@ -28,7 +28,7 @@
   <Cliente>
     <cod>2</cod>
     <data>28/05/2014 às 12:32</data>
-    <nome>Meu Terceiro Cliente</nome>
+    <nome>Terceiro Cliente</nome>
     <cpf>5619419</cpf>
     <telefone>41919</telefone>
     <cidade>8198189</cidade>
@@ -38,6 +38,18 @@
     <plataforma>Desktop</plataforma>
     <descricao>9819819189</descricao>
   </Cliente>
-  <null/>
+  <Cliente>
+    <cod>3</cod>
+    <data>28/05/2014 às 13:37</data>
+    <nome>Maikon Evangelista</nome>
+    <cpf>00000000000</cpf>
+    <telefone>000000</telefone>
+    <cidade>São Paulo/SP</cidade>
+    <endereco>Rua Aleatória, 123</endereco>
+    <email>iuyvivyvas@aisyhdbvq.com</email>
+    <programa>2048</programa>
+    <plataforma>Mobile</plataforma>
+    <descricao>Um jogo extremamente viciante</descricao>
+  </Cliente>
   <null/>
 </Cliente-array>
