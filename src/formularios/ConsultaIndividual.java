@@ -11,14 +11,17 @@ import classes.XML;
  */
 //</editor-fold>
 public class ConsultaIndividual extends javax.swing.JFrame {
-    public int ultimo = 0, atual = 2;
+    public static int ultimo = 0, atual = 2;
+    
     Cliente[] cliente;
     String destino = "./src/arquivos/db/";
     XML xml = new XML(destino);
     
+    public boolean fechar=false;
+    
     //<editor-fold defaultstate="collapsed" desc="método construtor Consulta()">
-    public ConsultaIndividual() {
-        inicializar();
+    public ConsultaIndividual(int a) {
+        inicializar(a);
     }
 //</editor-fold>
 
@@ -199,12 +202,13 @@ public class ConsultaIndividual extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addComponent(lblinf1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCod)
-                    .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lblData)
-                        .addComponent(txtData)))
+                        .addComponent(txtData))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblCod)
+                        .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNome)
@@ -254,8 +258,11 @@ public class ConsultaIndividual extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoVoltarActionPerformed
-        // DISPOSE: FUNÇÃO QUE FECHA A JANELA (DESTA CLASSE)
-        dispose();
+        /* 
+        *   DISPOSE: FUNÇÃO QUE FECHA A JANELA (ESTA CLASSE)
+        */
+        fechar=true;
+        this.dispose();
     }//GEN-LAST:event_botaoVoltarActionPerformed
 
     //<editor-fold defaultstate="collapsed" desc="leituraInicial()">
@@ -264,16 +271,37 @@ public class ConsultaIndividual extends javax.swing.JFrame {
         
         if(haClientes()){
             //ultimo = ultimoCliente(cliente).cod;
-            System.out.println("> Dados do cliente "+cliente[atual].nome+" carregados com sucesso.");
+            //System.out.println("> Dados do cliente "+cliente[atual].nome+" carregados com sucesso.");
         } else {
             JOptionPane.showMessageDialog(this, "Não há clientes cadastrados.", "Erro!", JOptionPane.ERROR_MESSAGE);
         }
     }
 //</editor-fold>
     
+    //<editor-fold defaultstate="collapsed" desc="limparCampos()">
+    void limparCampos(){
+    /*
+        FUNÇÃO QUE ATRIBUI À TODOS OS CAMPOS
+        UM VALOR NULO (DEIXA TODOS OS CAMPOS "LIMPOS")
+    */
+        txtCod.setText(null);
+        txtNome.setText(null);
+        txtCPF.setText(null);
+        txtTel.setText(null);
+        txtCidade.setText(null);
+        txtEndereco.setText(null);
+        txtEmail.setText(null);
+        txtPrograma.setText(null);
+        txtDescricao.setText(null);
+        txtData.setText(null);
+    }
+//</editor-fold>
+    
     //<editor-fold defaultstate="collapsed" desc="inicializar()">
-    public void inicializar(){
+    public void inicializar(int a){
         try {
+            atual = a;
+            setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             leituraInicial();
             initComponents();
             preencherCampos();
@@ -419,7 +447,7 @@ public class ConsultaIndividual extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ConsultaIndividual().setVisible(true);
+                new ConsultaIndividual(atual).setVisible(true);
             }
         });
     }

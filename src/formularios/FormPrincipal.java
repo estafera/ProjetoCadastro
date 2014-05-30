@@ -19,7 +19,7 @@ public class FormPrincipal extends javax.swing.JFrame {
     Remover remover;
     Editar editar;
     Consulta consulta;
-    ConsultaIndividual individual;
+    Pesquisa pesquisa;
     
     //<editor-fold defaultstate="collapsed" desc="Construtor FormPrincipal()">
     public FormPrincipal() {
@@ -190,7 +190,7 @@ public class FormPrincipal extends javax.swing.JFrame {
                 criarConsulta();
                 break;
             case 1:
-                
+                criarPesquisa();
                 break;
         }
         
@@ -204,12 +204,12 @@ public class FormPrincipal extends javax.swing.JFrame {
             consulta = null;
     }
     
-    public void criarConsIndividual(){
-        individual = new ConsultaIndividual();
-        if(individual.haClientes())
-            individual.setVisible(true);
+    public void criarPesquisa(){
+        pesquisa = new Pesquisa();
+        if(pesquisa.haClientes())
+            pesquisa.setVisible(true);
         else
-            individual = null;
+            pesquisa = null;
     }
     
     public void criarEditar(){
