@@ -1,3 +1,9 @@
+/*
+ *  Projeto Integrador — 1º Semestre TADS — Turma B
+ *  Raikon Project
+ *  @authors Ramon Honorio, Maikon Evangelista
+ */
+
 package formularios;
 
 import java.io.FileNotFoundException;
@@ -5,11 +11,6 @@ import javax.swing.JOptionPane;
 import classes.Cliente;
 import classes.XML;
 
-//<editor-fold defaultstate="collapsed" desc="Desenvolvedores">
-/*
- * @authors Ramon Honorio, Maikon Evangelista
- */
-//</editor-fold>
 public class ConsultaIndividual extends javax.swing.JFrame {
     public static int ultimo = 0, atual = 2;
     
@@ -266,12 +267,15 @@ public class ConsultaIndividual extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoVoltarActionPerformed
 
     //<editor-fold defaultstate="collapsed" desc="leituraInicial()">
+    /*
+    * Faz uma leitura do XML e testa se há clientes cadastrados.
+    * Para cada caso é exibida uma mensagem (console/JOptionPane para o usuario).
+    */
     void leituraInicial() throws FileNotFoundException{
         cliente = xml.lerClientes();
         
         if(haClientes()){
-            //ultimo = ultimoCliente(cliente).cod;
-            //System.out.println("> Dados do cliente "+cliente[atual].nome+" carregados com sucesso.");
+            System.out.println("> Dados do cliente "+cliente[atual].nome+" carregados com sucesso.");
         } else {
             JOptionPane.showMessageDialog(this, "Não há clientes cadastrados.", "Erro!", JOptionPane.ERROR_MESSAGE);
         }
@@ -298,6 +302,10 @@ public class ConsultaIndividual extends javax.swing.JFrame {
 //</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc="inicializar()">
+    /*
+    * Faz uma leitura do XML, carrega os componentes do formulário e trata
+    * os possíveis erros (try/catch)
+    */
     public void inicializar(int a){
         try {
             atual = a;

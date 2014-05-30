@@ -1,3 +1,9 @@
+/*
+ *  Projeto Integrador — 1º Semestre TADS — Turma B
+ *  Raikon Project
+ *  @authors Ramon Honorio, Maikon Evangelista
+ */
+
 package formularios;
 
 import java.io.FileNotFoundException;
@@ -11,22 +17,23 @@ import classes.XML;
  */
 //</editor-fold>
 public class Consulta extends javax.swing.JFrame {
+    
+    // Variaveis
     int ultimo = 0, atual = 0;
-    Cliente[] cliente;
     String destino = "./src/arquivos/db/";
+    
+    // Vetor de clientes
+    Cliente[] cliente;
+    
+    // Criando um objeto da classe XML
     XML xml = new XML(destino);
     
     //<editor-fold defaultstate="collapsed" desc="método construtor Consulta()">
+    /*
+    *   Construtor — quando a classe é criada, imediatamente o método 
+    *   inicializar() é chamado.
+    */
     public Consulta() {
-    //<editor-fold defaultstate="collapsed" desc="rascunho">
-        /*initComponents();
-        try {
-        leituraInicial();
-        } catch(FileNotFoundException e){
-        System.out.println("Arquivo não encontrado "+e);
-        }
-        preencherCampos();*/
-//</editor-fold>
         inicializar();
     }
 //</editor-fold>
@@ -311,16 +318,22 @@ public class Consulta extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoVoltarActionPerformed
 
     private void botaoAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAnteriorActionPerformed
+        // Se o botão for clicado, as funções abaixo serão chamadas.
         anterior();
         preencherCampos();
     }//GEN-LAST:event_botaoAnteriorActionPerformed
 
     private void botaoProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoProximoActionPerformed
+        // Se o botão for clicado, as funções abaixo serão chamadas.
         proximo();
         preencherCampos();
     }//GEN-LAST:event_botaoProximoActionPerformed
 
     //<editor-fold defaultstate="collapsed" desc="leituraInicial()">
+    /*
+    * Faz uma leitura do XML e testa se há clientes cadastrados.
+    * Para cada caso é exibida uma mensagem (console/JOptionPane para o usuario).
+    */
     void leituraInicial() throws FileNotFoundException{
         cliente = xml.lerClientes();
         

@@ -1,20 +1,22 @@
 /*
- * Ícones retirados de  www.iconarchive.com
+ *  Projeto Integrador — 1º Semestre TADS — Turma B
+ *  Raikon Project
+ *
+ *  @authors Ramon Honorio, Maikon Evangelista
+ *
+ *  Ícones retirados de  www.iconarchive.com
  *                      Artista: Oxygen Team
  */
 
 package formularios;
 
-//<editor-fold defaultstate="collapsed" desc="Desenvolvedores">
-
 import javax.swing.JOptionPane;
 
-/*
- * @authors Ramon Honorio, Maikon Evangelista
- */
-//</editor-fold>
 public class FormPrincipal extends javax.swing.JFrame {
     
+    /*
+    *   Variaveis dos formularios
+    */
     Cadastro cadastro;
     Remover remover;
     Editar editar;
@@ -22,6 +24,9 @@ public class FormPrincipal extends javax.swing.JFrame {
     Pesquisa pesquisa;
     
     //<editor-fold defaultstate="collapsed" desc="Construtor FormPrincipal()">
+    /*
+    *   Inicializa os componentes da janela (JFrame)
+    */
     public FormPrincipal() {
         initComponents();
     }
@@ -156,34 +161,42 @@ public class FormPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCadastroActionPerformed
+        // Se o botão for clicado, a função abaixo será chamada.
         criarCadastro();
     }//GEN-LAST:event_botaoCadastroActionPerformed
 
     private void botaoRemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoRemActionPerformed
-        // TODO add your handling code here:
+        // Se o botão for clicado, a função abaixo será chamada.
         criarRemover();
     }//GEN-LAST:event_botaoRemActionPerformed
 
     private void botaoEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEditActionPerformed
-        // TODO add your handling code here:
+        // Se o botão for clicado, a função abaixo será chamada.
         criarEditar();
     }//GEN-LAST:event_botaoEditActionPerformed
 
     private void botaoConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoConsultaActionPerformed
-        // TODO add your handling code here:
-        
-        //criarConsulta();
+        // Se o botão for clicado, a função abaixo será chamada.
         escolherConsulta();
         
     }//GEN-LAST:event_botaoConsultaActionPerformed
     
+    //<editor-fold defaultstate="collapsed" desc="opcoesConsulta()">
     public int opcoesConsulta(){
+        /*
+        *   Cria as opções do JOptionPane da consulta
+        */
         Object[] op = {"Consulta Geral", "Pesquisar um único cliente"};
         
-        return JOptionPane.showOptionDialog(null, "Escolha qual tipo de consulta deseja realizar:", "Consulta", 
+        return JOptionPane.showOptionDialog(null, "Escolha qual tipo de consulta deseja realizar:", "Consulta",
                 0, 1, null, op, op);
     }
+//</editor-fold>
     
+    //<editor-fold defaultstate="collapsed" desc="escolherConsulta()">
+    /*
+    *   Verifica qual opção foi escolhida pelo usuário e chama as respectivas funções
+    */
     public void escolherConsulta(){
         switch(opcoesConsulta()){
             case 0:
@@ -193,9 +206,15 @@ public class FormPrincipal extends javax.swing.JFrame {
                 criarPesquisa();
                 break;
         }
-        
     }
+//</editor-fold>
     
+    //<editor-fold defaultstate="collapsed" desc="criarConsulta()">
+    /*
+    *   Cria a janela.
+    *   Se existirem clientes: ela se torna visível
+    *   Se não, é atribuido um valor nulo.
+    */
     public void criarConsulta(){
         consulta = new Consulta();
         if(consulta.haClientes())
@@ -203,7 +222,14 @@ public class FormPrincipal extends javax.swing.JFrame {
         else
             consulta = null;
     }
+//</editor-fold>
     
+    //<editor-fold defaultstate="collapsed" desc="criarPesquisa()">
+    /*
+    *   Cria a janela.
+    *   Se existirem clientes: ela se torna visível
+    *   Se não, é atribuido um valor nulo.
+    */
     public void criarPesquisa(){
         pesquisa = new Pesquisa();
         if(pesquisa.haClientes())
@@ -211,7 +237,14 @@ public class FormPrincipal extends javax.swing.JFrame {
         else
             pesquisa = null;
     }
+//</editor-fold>
     
+    //<editor-fold defaultstate="collapsed" desc="criarEditar()">
+    /*
+    *   Cria a janela.
+    *   Se existirem clientes: ela se torna visível
+    *   Se não, é atribuido um valor nulo.
+    */
     public void criarEditar(){
         editar = new Editar();
         if(editar.haClientes())
@@ -219,7 +252,14 @@ public class FormPrincipal extends javax.swing.JFrame {
         else
             editar = null;
     }
+//</editor-fold>
     
+    //<editor-fold defaultstate="collapsed" desc="criarRemover()">
+    /*
+    *   Cria a janela.
+    *   Se existirem clientes: ela se torna visível
+    *   Se não, é atribuido um valor nulo.
+    */
     public void criarRemover(){
         remover = new Remover();
         if(remover.haClientes())
@@ -227,11 +267,17 @@ public class FormPrincipal extends javax.swing.JFrame {
         else
             remover = null;
     }
+//</editor-fold>
     
+    //<editor-fold defaultstate="collapsed" desc="criarCadastro()">
+    /*
+    *   Cria a janela, independentemente de existirem clientes ou não.
+    */
     public void criarCadastro(){
         cadastro = new Cadastro();
         cadastro.setVisible(true);
     }
+//</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc="Método Main()">
     public static void main(String args[]) {

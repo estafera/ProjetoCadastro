@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ *  Projeto Integrador — 1º Semestre TADS — Turma B
+ *  Raikon Project
+ *  @authors Ramon Honorio, Maikon Evangelista
  */
 
 package formularios;
@@ -10,7 +10,6 @@ import classes.Cliente;
 import classes.XML;
 import java.io.FileNotFoundException;
 import javax.swing.JOptionPane;
-
 
 public class Pesquisa extends javax.swing.JFrame {
     int ultimo = 0;
@@ -22,6 +21,9 @@ public class Pesquisa extends javax.swing.JFrame {
     int posicao = -1;
     
     public Pesquisa() {
+        /*
+        *   Construtor — chama o método inicializar
+        */
         inicializar();
     }
 
@@ -153,6 +155,9 @@ public class Pesquisa extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPesquisarActionPerformed
+        /*
+        *   Se o botão for clicado, será chamada a função pesquisar();
+        */
         pesquisar();
     }//GEN-LAST:event_btPesquisarActionPerformed
 
@@ -207,7 +212,30 @@ public class Pesquisa extends javax.swing.JFrame {
     }
 //</editor-fold>
     
+    //<editor-fold defaultstate="collapsed" desc="inicializar()">
+    /*
+    * Faz uma leitura do XML, carrega os componentes do formulário e trata
+    * os possíveis erros (try/catch)
+    */
+    public void inicializar(){
+        try {
+            leituraInicial();
+            initComponents();
+        } catch(FileNotFoundException e){
+            System.out.println("Arquivo não encontrado "+e);
+        } catch (NullPointerException e){
+            System.out.println(">> Não há clientes cadastrados.");
+        }
+    }
+//</editor-fold> 
+    
     //<editor-fold defaultstate="collapsed" desc="Buscas (nome/cpf/email)">
+    /*
+    *   Funções que percorrem o vetor de clientes verificando se os dados que usuário
+    *   digitou, coincidem com os dados de alguma posição do vetor.
+    */
+    
+    //<editor-fold defaultstate="collapsed" desc="buscarNome(String nome)">
     void buscarNome(String nome){
         ultimo = ultimoCliente(cliente).cod;
         
@@ -220,7 +248,9 @@ public class Pesquisa extends javax.swing.JFrame {
             }
         }
     }
+//</editor-fold>
     
+    //<editor-fold defaultstate="collapsed" desc="buscarCpf(String cpf)">
     void buscarCpf(String cpf){
         ultimo = ultimoCliente(cliente).cod;
         
@@ -233,7 +263,9 @@ public class Pesquisa extends javax.swing.JFrame {
             }
         }
     }
+//</editor-fold>
     
+    //<editor-fold defaultstate="collapsed" desc="buscarEmail(String email)">
     void buscarEmail(String email){
         ultimo = ultimoCliente(cliente).cod;
         
@@ -246,6 +278,7 @@ public class Pesquisa extends javax.swing.JFrame {
             }
         }
     }
+//</editor-fold>
 //</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc="opcaoSelecionada()">
@@ -303,22 +336,7 @@ public class Pesquisa extends javax.swing.JFrame {
     }
 //</editor-fold>
     
-    //<editor-fold defaultstate="collapsed" desc="inicializar()">
-    /*
-    * Faz uma leitura do XML, carrega os componentes do formulário e trata
-    * os possíveis erros (try/catch)
-    */
-    public void inicializar(){
-        try {
-            leituraInicial();
-            initComponents();
-        } catch(FileNotFoundException e){
-            System.out.println("Arquivo não encontrado "+e);
-        } catch (NullPointerException e){
-            System.out.println(">> Não há clientes cadastrados.");
-        }
-    }
-//</editor-fold>    
+   
     
     //<editor-fold defaultstate="collapsed" desc="haClientes()">
     /*
