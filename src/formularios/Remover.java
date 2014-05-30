@@ -340,6 +340,10 @@ public class Remover extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoRemoverActionPerformed
 
     //<editor-fold defaultstate="collapsed" desc="remover()">
+    /*
+    *   Remove o cliente selecionado e realoca todas as posições posteriores
+    *   à 1 posição antes.
+    */
     void remover() {
         for (int i = atual; i < ultimo; i++) {
             int j = i + 1;
@@ -353,6 +357,9 @@ public class Remover extends javax.swing.JFrame {
 //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="ultimoCliente(Cliente[] c)">
+    /*
+    *   Retorna o último cliente do vetor
+    */
     Cliente ultimoCliente(Cliente[] lista){
         int ultimoCl = 0;
         boolean haNulos = false;
@@ -376,6 +383,10 @@ public class Remover extends javax.swing.JFrame {
 //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="leituraInicial()">
+    /*
+    * Faz uma leitura do XML e testa se há clientes cadastrados.
+    * Para cada caso é exibida uma mensagem (console/JOptionPane para o usuario).
+    */
     void leituraInicial() throws FileNotFoundException {
         cliente = xml.lerClientes();
         
@@ -390,12 +401,11 @@ public class Remover extends javax.swing.JFrame {
 //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="inicializar()">
-
-    /**
-     *
-     */
-        public void inicializar() {
-        
+    /*
+    * Faz uma leitura do XML, carrega os componentes do formulário e trata
+    * os possíveis erros (try/catch)
+    */
+    public void inicializar() {
         try {
             leituraInicial();
             initComponents();
@@ -423,6 +433,9 @@ public class Remover extends javax.swing.JFrame {
 //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="selecBotaoPlataforma()">
+    /*
+    *   Seleciona o botão da plataforma que está salvo no XML e 'desabilita' os outros
+    */
     void selecBotaoPlataforma(String p){
         switch(p){
             case "Web":
@@ -446,6 +459,10 @@ public class Remover extends javax.swing.JFrame {
 //</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc="preencherCampos()">
+    /*
+    *   Preenche os campos do form com as informações da posição (atual)
+    *   no vetor
+    */
     void preencherCampos(){
         txtCadastros.setText(String.valueOf(ultimo+1));
         
@@ -468,30 +485,37 @@ public class Remover extends javax.swing.JFrame {
 //</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc="haClientes()">
-   public boolean haClientes(){
-       return cliente[0]!=null;
-   }
+    /*
+    *   VERIFICA SE JÁ EXISTEM CLIENTES CADASTRADOS E RETORNA O VALOR COMO TRUE/FALSE
+    */
+    public boolean haClientes(){
+        return cliente[0]!=null;
+    }
 //</editor-fold>
    
     //<editor-fold defaultstate="collapsed" desc="proximo()">
-    void proximo() {
-        if (atual < ultimo) {
+    /*
+    *   Atribui o próximo cliente no vetor
+    */
+    void proximo(){
+        if(atual<ultimo){
             ++atual;
         } else {
             atual = 0;
         }
-        //System.out.println("> Atual: "+atual);
     }
 //</editor-fold>
-
+    
     //<editor-fold defaultstate="collapsed" desc="anterior()">
-    void anterior() {
-        if (atual > 0) {
+    /*
+    *   Atribui o cliente antecessor no vetor
+    */
+    void anterior(){
+        if(atual>0){
             --atual;
         } else {
             atual = ultimo;
         }
-        //System.out.println("> Atual: "+atual);
     }
 //</editor-fold>
     

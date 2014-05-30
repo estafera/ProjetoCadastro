@@ -1,27 +1,28 @@
+/*
+ *  Projeto Integrador — 1º Semestre TADS — Turma B
+ *  Raikon Project
+ *  @authors Ramon Honorio, Maikon Evangelista
+ */
+
 package formularios;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import classes.Cliente;
 import classes.XML;
 
-//<editor-fold defaultstate="collapsed" desc="Desenvolvedores">
-/*
- * @authors Ramon Honorio, Maikon Evangelista
- */
-//</editor-fold>
-public class Editar extends javax.swing.JFrame {
-    int ultimo = 0, atual = 0;
+public class ConsultaInd extends javax.swing.JFrame {
+    public static int ultimo = 0, atual = 2;
+    
     Cliente[] cliente;
     String destino = "./src/arquivos/db/";
     XML xml = new XML(destino);
     
-    //<editor-fold defaultstate="collapsed" desc="método construtor Editar()">
-    public Editar() {
-        inicializar();
+    public boolean fechar=false;
+    
+    //<editor-fold defaultstate="collapsed" desc="método construtor Consulta()">
+    public ConsultaInd(int a) {
+        inicializar(a);
     }
 //</editor-fold>
 
@@ -51,23 +52,17 @@ public class Editar extends javax.swing.JFrame {
         txtEmail = new javax.swing.JTextField();
         lblEmail = new javax.swing.JLabel();
         botaoVoltar = new javax.swing.JButton();
-        labelClientesCad = new javax.swing.JLabel();
-        botaoProximo = new javax.swing.JButton();
-        botaoAnterior = new javax.swing.JButton();
         lblCod = new javax.swing.JLabel();
         txtCod = new javax.swing.JTextField();
-        jSeparator1 = new javax.swing.JSeparator();
-        botaoSalvar = new javax.swing.JButton();
-        radioWeb = new javax.swing.JRadioButton();
-        radioDesk = new javax.swing.JRadioButton();
-        radioMobile = new javax.swing.JRadioButton();
         radioOutra = new javax.swing.JRadioButton();
+        radioMobile = new javax.swing.JRadioButton();
+        radioDesk = new javax.swing.JRadioButton();
+        radioWeb = new javax.swing.JRadioButton();
         txtData = new javax.swing.JLabel();
         lblData = new javax.swing.JLabel();
-        txtCadastros = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Editar");
+        setTitle("Consulta");
 
         lblNome.setText("Nome:");
 
@@ -75,13 +70,20 @@ public class Editar extends javax.swing.JFrame {
 
         lblDescricao.setText("Descrição:");
 
+        txtNome.setEditable(false);
+
+        txtCPF.setEditable(false);
+
         jScrollPane2.setFocusable(false);
 
+        txtDescricao.setEditable(false);
         txtDescricao.setColumns(20);
         txtDescricao.setRows(5);
         jScrollPane2.setViewportView(txtDescricao);
 
         lblEndereco.setText("Endereço:");
+
+        txtEndereco.setEditable(false);
 
         lblTel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTel.setText("Telefone:");
@@ -93,11 +95,17 @@ public class Editar extends javax.swing.JFrame {
 
         lblPrograma.setText("Nome do programa:");
 
+        txtPrograma.setEditable(false);
+
         lblCidade.setText("Cidade/Estado:");
+
+        txtCidade.setEditable(false);
 
         lblinf1.setText("Informações do cliente");
 
         lblinf2.setText("Informações do projeto");
+
+        txtEmail.setEditable(false);
 
         lblEmail.setText("Email:");
 
@@ -108,22 +116,6 @@ public class Editar extends javax.swing.JFrame {
             }
         });
 
-        labelClientesCad.setText("Clientes cadastrados: ");
-
-        botaoProximo.setText("Próximo >");
-        botaoProximo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoProximoActionPerformed(evt);
-            }
-        });
-
-        botaoAnterior.setText("< Anterior");
-        botaoAnterior.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoAnteriorActionPerformed(evt);
-            }
-        });
-
         lblCod.setText("Codigo do cliente:");
 
         txtCod.setEditable(false);
@@ -131,32 +123,18 @@ public class Editar extends javax.swing.JFrame {
         txtCod.setFocusable(false);
         txtCod.setRequestFocusEnabled(false);
 
-        botaoSalvar.setText("Salvar Alterações");
-        botaoSalvar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoSalvarActionPerformed(evt);
-            }
-        });
+        radioOutra.setText("Outra");
 
-        bGrupoPlataforma.add(radioWeb);
-        radioWeb.setSelected(true);
-        radioWeb.setText("Web");
-
-        bGrupoPlataforma.add(radioDesk);
-        radioDesk.setText("Desktop");
-
-        bGrupoPlataforma.add(radioMobile);
         radioMobile.setText("Mobile");
 
-        bGrupoPlataforma.add(radioOutra);
-        radioOutra.setText("Outra");
+        radioDesk.setText("Desktop");
+
+        radioWeb.setText("Web");
 
         txtData.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         txtData.setText("28/05/2014 às 11:02");
 
         lblData.setText("Cadastro realizado em");
-
-        txtCadastros.setText("0");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -165,13 +143,10 @@ public class Editar extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(labelClientesCad)
-                        .addGap(27, 27, 27)
-                        .addComponent(txtCadastros, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jSeparator1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblCod)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblinf1)
+                            .addComponent(lblCod))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,14 +161,8 @@ public class Editar extends javax.swing.JFrame {
                                     .addComponent(lblNome, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lblPrograma)
                                     .addComponent(lblinf2))
-                                .addGap(0, 23, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(botaoSalvar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)))
+                                .addGap(0, 20, Short.MAX_VALUE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(botaoVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txtEmail)
                             .addComponent(txtCidade)
                             .addComponent(txtEndereco)
@@ -214,40 +183,25 @@ public class Editar extends javax.swing.JFrame {
                                 .addComponent(txtData))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(radioWeb)
-                                .addGap(52, 52, 52)
+                                .addGap(50, 50, 50)
                                 .addComponent(radioDesk)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                                 .addComponent(radioMobile)
-                                .addGap(42, 42, 42)
+                                .addGap(50, 50, 50)
                                 .addComponent(radioOutra))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblinf1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(botaoAnterior)
-                        .addGap(18, 18, 18)
-                        .addComponent(botaoProximo)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(botaoVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(20, 20, 20))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {lblinf1, lblinf2});
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {botaoSalvar, botaoVoltar});
-
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelClientesCad)
-                    .addComponent(txtCadastros))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(botaoProximo)
-                        .addComponent(botaoAnterior))
-                    .addComponent(lblinf1))
+                .addComponent(lblinf1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -284,7 +238,7 @@ public class Editar extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtPrograma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblPrograma))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(radioWeb)
@@ -292,14 +246,12 @@ public class Editar extends javax.swing.JFrame {
                         .addComponent(radioMobile)
                         .addComponent(radioOutra))
                     .addComponent(lblPlataforma))
-                .addGap(5, 5, 5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblDescricao)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botaoVoltar)
-                    .addComponent(botaoSalvar))
+                .addComponent(botaoVoltar)
                 .addGap(20, 20, 20))
         );
 
@@ -307,144 +259,64 @@ public class Editar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoVoltarActionPerformed
-        /*
-        *   Atribui à variável atual o valor 0 e fecha a janela.
+        /* 
+        *   DISPOSE: FUNÇÃO QUE FECHA A JANELA (ESTA CLASSE)
         */
-        atual = 0;
-        dispose();
+        fechar=true;
+        this.dispose();
     }//GEN-LAST:event_botaoVoltarActionPerformed
 
-    private void botaoAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAnteriorActionPerformed
-        /*
-        *   Seleciona o cliente anterior da posição e preenche os campos com 
-        *   a informação dele.
-        */
-        anterior();
-        preencherCampos();
-    }//GEN-LAST:event_botaoAnteriorActionPerformed
-
-    private void botaoProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoProximoActionPerformed
-        /*
-        *   Seleciona o cliente sucessor da posição e preenche os campos com 
-        *   a informação dele.
-        */
-        proximo();
-        preencherCampos();
-    }//GEN-LAST:event_botaoProximoActionPerformed
-
-    private void botaoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSalvarActionPerformed
-        /*
-        *   Realiza as alterações e salva no XML
-        */
-        alteracoes();
-        try {
-            xml.salvarClientes(cliente);
-        } catch (IOException ex) {
-            Logger.getLogger(Cadastro.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_botaoSalvarActionPerformed
-    
     //<editor-fold defaultstate="collapsed" desc="leituraInicial()">
     /*
-    *   Faz uma leitura do XML e testa se há clientes cadastrados.
-    *   Para cada caso é exibida uma mensagem (console/JOptionPane para o usuario).
-    */    
+    * Faz uma leitura do XML e testa se há clientes cadastrados.
+    * Para cada caso é exibida uma mensagem (console/JOptionPane para o usuario).
+    */
     void leituraInicial() throws FileNotFoundException{
         cliente = xml.lerClientes();
         
-        if(haClientes()){            
-            for (int i = 0; i <= ultimoCliente(cliente).cod; i++) {
-                try {
-                    if(cliente[i]!=null){
-                        ultimo = i;
-                    }
-                } catch (NullPointerException e) {
-                    System.out.println("Cliente com valor nulo - leituraInicial()");
-                } catch (ArrayIndexOutOfBoundsException x){}
-            }
+        if(haClientes()){
+            System.out.println("> Dados do cliente "+cliente[atual].nome+" carregados com sucesso.");
         } else {
             JOptionPane.showMessageDialog(this, "Não há clientes cadastrados.", "Erro!", JOptionPane.ERROR_MESSAGE);
         }
-        
+    }
+//</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="limparCampos()">
+    void limparCampos(){
+    /*
+        FUNÇÃO QUE ATRIBUI À TODOS OS CAMPOS
+        UM VALOR NULO (DEIXA TODOS OS CAMPOS "LIMPOS")
+    */
+        txtCod.setText(null);
+        txtNome.setText(null);
+        txtCPF.setText(null);
+        txtTel.setText(null);
+        txtCidade.setText(null);
+        txtEndereco.setText(null);
+        txtEmail.setText(null);
+        txtPrograma.setText(null);
+        txtDescricao.setText(null);
+        txtData.setText(null);
     }
 //</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc="inicializar()">
     /*
-    *   Faz uma leitura do XML, carrega os componentes do formulário e trata
-    *   os possíveis erros (try/catch)
+    * Faz uma leitura do XML, carrega os componentes do formulário e trata
+    * os possíveis erros (try/catch)
     */
-    public void inicializar(){
+    public void inicializar(int a){
         try {
+            atual = a;
+            setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             leituraInicial();
             initComponents();
             preencherCampos();
         } catch(FileNotFoundException e){
-            System.out.println(">> Arquivo não encontrado "+e);
+            System.out.println("Arquivo não encontrado "+e);
         } catch (NullPointerException e){
             System.out.println(">> Não há clientes cadastrados.");
-        }
-    }
-//</editor-fold>
-    
-    //<editor-fold defaultstate="collapsed" desc="preencherCampos()">
-    /*
-    *   Preenche os campos do form com as informações da posição (atual)
-    *   no vetor
-    */
-    void preencherCampos(){
-        txtCadastros.setText(String.valueOf(ultimo+1));
-        txtCod.setText(String.valueOf(cliente[atual].cod));
-        txtData.setText(cliente[atual].data);
-        
-        txtNome.setText(cliente[atual].nome);
-        txtCPF.setText(cliente[atual].cpf);
-        txtTel.setText(cliente[atual].telefone);
-        txtCidade.setText(cliente[atual].cidade);
-        txtEndereco.setText(cliente[atual].endereco);
-        txtEmail.setText(cliente[atual].email);
-        txtPrograma.setText(cliente[atual].programa);
-        txtDescricao.setText(cliente[atual].descricao);
-        
-        selecBotaoPlataforma(cliente[atual].plataforma);
-        
-    }
-//</editor-fold>
-    
-    //<editor-fold defaultstate="collapsed" desc="resetarBotoes">
-    /*
-    *   Atribui à todos os botões da plataforma um valor de não-seleção
-    */
-    void resetarBotoes(){
-        radioWeb.setSelected(false);
-        radioDesk.setSelected(false);
-        radioMobile.setSelected(false);
-        radioOutra.setSelected(false);
-        radioWeb.setEnabled(false);
-        radioMobile.setEnabled(false);
-        radioDesk.setEnabled(false);
-        radioOutra.setEnabled(false);
-    }
-//</editor-fold>
-    
-    //<editor-fold defaultstate="collapsed" desc="selecBotaoPlataforma()">
-    /*
-    *   Seleciona o botão da plataforma que está salvo no XML e 'desabilita' os outros
-    */
-    void selecBotaoPlataforma(String p){
-        switch(p){
-            case "Web":
-                radioWeb.setSelected(true);
-                break;
-            case "Desktop":
-                radioDesk.setSelected(true);
-                break;
-            case "Mobile":
-                radioMobile.setSelected(true);
-                break;
-            case "Outra":
-                radioOutra.setSelected(true);
-                break;
         }
     }
 //</editor-fold>
@@ -501,36 +373,70 @@ public class Editar extends javax.swing.JFrame {
     }
 //</editor-fold>
     
-    //<editor-fold defaultstate="collapsed" desc="alteracoes()">
+    //<editor-fold defaultstate="collapsed" desc="resetarBotoes">
     /*
-    *   Recebe as informações de cada campo (sujeito a alteração do usuário)
-    *   e atribui ao cliente[atual]
+    *   Atribui à todos os botões da plataforma um valor de não-seleção
     */
-    void alteracoes(){
-        
-        cliente[atual].cod = atual;
-        cliente[atual].nome = txtNome.getText();
-        cliente[atual].cpf = txtCPF.getText();
-        cliente[atual].telefone = txtTel.getText();
-        cliente[atual].cidade = txtCidade.getText();
-        cliente[atual].endereco = txtEndereco.getText();
-        cliente[atual].email = txtEmail.getText();
-        cliente[atual].programa = txtPrograma.getText();
-        cliente[atual].descricao = txtDescricao.getText();
-        
-        if(radioWeb.isSelected()){
-            cliente[atual].plataforma = "Web";
-        } else if(radioDesk.isSelected()){
-            cliente[atual].plataforma = "Desktop";
-        } else if(radioMobile.isSelected()){
-            cliente[atual].plataforma = "Mobile";
-        } else {
-            cliente[atual].plataforma = "Outra";
+    void resetarBotoes(){
+        radioWeb.setSelected(false);
+        radioDesk.setSelected(false);
+        radioMobile.setSelected(false);
+        radioOutra.setSelected(false);
+        radioWeb.setEnabled(false);
+        radioMobile.setEnabled(false);
+        radioDesk.setEnabled(false);
+        radioOutra.setEnabled(false);
+    }
+//</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="selecBotaoPlataforma()">
+    /*
+    *   Seleciona o botão da plataforma que está salvo no XML e 'desabilita' os outros
+    */
+    void selecBotaoPlataforma(String p){
+        switch(p){
+            case "Web":
+                radioWeb.setEnabled(true);
+                radioWeb.setSelected(true);
+                break;
+            case "Desktop":
+                radioDesk.setEnabled(true);
+                radioDesk.setSelected(true);
+                break;
+            case "Mobile":
+                radioMobile.setEnabled(true);
+                radioMobile.setSelected(true);
+                break;
+            case "Outra":
+                radioOutra.setEnabled(true);
+                radioOutra.setSelected(true);
+                break;
         }
+    }
+//</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="preencherCampos()">
+    /*
+    *   Preenche os campos do form com as informações da posição (atual)
+    *   no vetor
+    */
+    void preencherCampos(){
         
-        System.out.println("> Alterações (CLIENTE "+(atual)+") realizadas.");
-        JOptionPane.showMessageDialog(null, "As alterações foram realizadas.", 
-                "Cliente (CODIGO: "+atual+")", JOptionPane.INFORMATION_MESSAGE);
+        txtCod.setText(String.valueOf(cliente[atual].cod));
+        txtData.setText(cliente[atual].data);
+        
+        txtNome.setText(cliente[atual].nome);
+        txtCPF.setText(cliente[atual].cpf);
+        txtTel.setText(cliente[atual].telefone);
+        txtCidade.setText(cliente[atual].cidade);
+        txtEndereco.setText(cliente[atual].endereco);
+        txtEmail.setText(cliente[atual].email);
+        txtPrograma.setText(cliente[atual].programa);
+        txtDescricao.setText(cliente[atual].descricao);
+        
+        resetarBotoes();
+        selecBotaoPlataforma(cliente[atual].plataforma);
+        
     }
 //</editor-fold>
     
@@ -558,20 +464,20 @@ public class Editar extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Editar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultaInd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Editar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultaInd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Editar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultaInd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Editar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultaInd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Editar().setVisible(true);
+                new ConsultaInd(atual).setVisible(true);
             }
         });
     }
@@ -579,13 +485,8 @@ public class Editar extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bGrupoPlataforma;
-    private javax.swing.JButton botaoAnterior;
-    private javax.swing.JButton botaoProximo;
-    private javax.swing.JButton botaoSalvar;
     private javax.swing.JButton botaoVoltar;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JLabel labelClientesCad;
     private javax.swing.JLabel lblCidade;
     private javax.swing.JLabel lblCod;
     private javax.swing.JLabel lblData;
@@ -604,7 +505,6 @@ public class Editar extends javax.swing.JFrame {
     private javax.swing.JRadioButton radioOutra;
     private javax.swing.JRadioButton radioWeb;
     private javax.swing.JTextField txtCPF;
-    private javax.swing.JLabel txtCadastros;
     private javax.swing.JTextField txtCidade;
     private javax.swing.JTextField txtCod;
     private javax.swing.JLabel txtData;

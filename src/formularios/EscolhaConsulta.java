@@ -11,16 +11,16 @@ import classes.XML;
 import java.io.FileNotFoundException;
 import javax.swing.JOptionPane;
 
-public class Pesquisa extends javax.swing.JFrame {
+public class EscolhaConsulta extends javax.swing.JFrame {
     int ultimo = 0;
     Cliente[] cliente;
     String destino = "./src/arquivos/db/";
     XML xml = new XML(destino);
-    ConsultaIndividual ci;
+    ConsultaInd ci;
     
     int posicao = -1;
     
-    public Pesquisa() {
+    public EscolhaConsulta() {
         /*
         *   Construtor — chama o método inicializar
         */
@@ -43,12 +43,12 @@ public class Pesquisa extends javax.swing.JFrame {
         txtCpf = new javax.swing.JTextField();
         txtEmail = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Pesquisa");
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Consulta individual");
 
         lblTitulo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTitulo.setText("Pesquisa no banco de dados");
+        lblTitulo.setText("Consulta no banco de dados");
 
         btPesquisar.setText("Pesquisar");
         btPesquisar.addActionListener(new java.awt.event.ActionListener() {
@@ -327,7 +327,7 @@ public class Pesquisa extends javax.swing.JFrame {
         }
         
         if(posicao>=0){
-            ci = new ConsultaIndividual(posicao);
+            ci = new ConsultaInd(posicao);
             ci.setVisible(true);
         } else {
             System.out.println("> Cliente não encontrado.");
@@ -335,8 +335,6 @@ public class Pesquisa extends javax.swing.JFrame {
         }
     }
 //</editor-fold>
-    
-   
     
     //<editor-fold defaultstate="collapsed" desc="haClientes()">
     /*
@@ -390,20 +388,20 @@ public class Pesquisa extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Pesquisa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EscolhaConsulta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Pesquisa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EscolhaConsulta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Pesquisa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EscolhaConsulta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Pesquisa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EscolhaConsulta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Pesquisa().setVisible(true);
+                new EscolhaConsulta().setVisible(true);
             }
         });
     }

@@ -21,7 +21,7 @@ public class FormPrincipal extends javax.swing.JFrame {
     Remover remover;
     Editar editar;
     Consulta consulta;
-    Pesquisa pesquisa;
+    EscolhaConsulta pesquisa;
     
     //<editor-fold defaultstate="collapsed" desc="Construtor FormPrincipal()">
     /*
@@ -231,7 +231,7 @@ public class FormPrincipal extends javax.swing.JFrame {
     *   Se não, é atribuido um valor nulo.
     */
     public void criarPesquisa(){
-        pesquisa = new Pesquisa();
+        pesquisa = new EscolhaConsulta();
         if(pesquisa.haClientes())
             pesquisa.setVisible(true);
         else

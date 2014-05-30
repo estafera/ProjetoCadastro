@@ -347,6 +347,10 @@ public class Consulta extends javax.swing.JFrame {
 //</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc="inicializar()">
+    /*
+    * Faz uma leitura do XML, carrega os componentes do formulário e trata
+    * os possíveis erros (try/catch)
+    */
     public void inicializar(){
         try {
             leituraInicial();
@@ -361,6 +365,9 @@ public class Consulta extends javax.swing.JFrame {
 //</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc="proximo()">
+    /*
+    *   Atribui o próximo cliente no vetor
+    */
     void proximo(){
         if(atual<ultimo){
             ++atual;
@@ -371,6 +378,9 @@ public class Consulta extends javax.swing.JFrame {
 //</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc="anterior()">
+    /*
+    *   Atribui o cliente antecessor no vetor
+    */
     void anterior(){
         if(atual>0){
             --atual;
@@ -381,6 +391,9 @@ public class Consulta extends javax.swing.JFrame {
 //</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc="ultimoCliente(Cliente[] c)">
+    /*
+    *   Retorna o último cliente do vetor
+    */
     Cliente ultimoCliente(Cliente[] lista){
         int ultimoCl = 0;
         boolean haNulos = false;
@@ -404,6 +417,9 @@ public class Consulta extends javax.swing.JFrame {
 //</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc="resetarBotoes">
+    /*
+    *   Atribui à todos os botões da plataforma um valor de não-seleção
+    */
     void resetarBotoes(){
         radioWeb.setSelected(false);
         radioDesk.setSelected(false);
@@ -417,6 +433,9 @@ public class Consulta extends javax.swing.JFrame {
 //</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc="selecBotaoPlataforma()">
+    /*
+    *   Seleciona o botão da plataforma que está salvo no XML e 'desabilita' os outros
+    */
     void selecBotaoPlataforma(String p){
         switch(p){
             case "Web":
@@ -440,6 +459,10 @@ public class Consulta extends javax.swing.JFrame {
 //</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc="preencherCampos()">
+    /*
+    *   Preenche os campos do form com as informações da posição (atual)
+    *   no vetor
+    */
     void preencherCampos(){
         txtCadastros.setText(String.valueOf(ultimo+1));
         
@@ -461,10 +484,14 @@ public class Consulta extends javax.swing.JFrame {
     }
 //</editor-fold>
     
-    // VERIFICA SE JÁ EXISTEM CLIENTES CADASTRADOS E RETORNA O VALOR COMO TRUE/FALSE
+    //<editor-fold defaultstate="collapsed" desc="haClientes()">
+    /*
+    *   VERIFICA SE JÁ EXISTEM CLIENTES CADASTRADOS E RETORNA O VALOR COMO TRUE/FALSE
+    */
     public boolean haClientes(){
         return cliente[0]!=null;
     }
+//</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc="Método Main()">
     public static void main(String args[]) {
