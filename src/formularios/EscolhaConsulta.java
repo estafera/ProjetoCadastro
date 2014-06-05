@@ -16,7 +16,7 @@ public class EscolhaConsulta extends javax.swing.JFrame {
     Cliente[] cliente;
     String destino = "./src/arquivos/db/";
     XML xml = new XML(destino);
-    ConsultaInd ci;
+    ConsultaIndividual ci;
     
     int posicao = -1;
     
@@ -327,7 +327,7 @@ public class EscolhaConsulta extends javax.swing.JFrame {
         }
         
         if(posicao>=0){
-            ci = new ConsultaInd(posicao);
+            ci = new ConsultaIndividual(posicao);
             ci.setVisible(true);
         } else {
             System.out.println("> Cliente não encontrado.");

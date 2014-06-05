@@ -68,7 +68,7 @@ public class Cadastro extends javax.swing.JFrame {
         lblinf2 = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
         lblEmail = new javax.swing.JLabel();
-        botaoConsulta = new javax.swing.JButton();
+        botaoListarClientes = new javax.swing.JButton();
         botaoVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -127,11 +127,11 @@ public class Cadastro extends javax.swing.JFrame {
 
         lblEmail.setText("Email:");
 
-        botaoConsulta.setText("Listar Clientes");
-        botaoConsulta.setEnabled(false);
-        botaoConsulta.addActionListener(new java.awt.event.ActionListener() {
+        botaoListarClientes.setText("Listar Clientes");
+        botaoListarClientes.setEnabled(false);
+        botaoListarClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoConsultaActionPerformed(evt);
+                botaoListarClientesActionPerformed(evt);
             }
         });
 
@@ -162,7 +162,7 @@ public class Cadastro extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblPrograma)
-                                    .addComponent(botaoConsulta))
+                                    .addComponent(botaoListarClientes))
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -204,7 +204,7 @@ public class Cadastro extends javax.swing.JFrame {
                 .addGap(343, 343, 343))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {botaoCadastrar, botaoConsulta, botaoLimpar});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {botaoCadastrar, botaoLimpar, botaoListarClientes});
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {lblinf1, lblinf2});
 
@@ -253,7 +253,7 @@ public class Cadastro extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblDescricao)
                         .addGap(25, 25, 25)
-                        .addComponent(botaoConsulta))
+                        .addComponent(botaoListarClientes))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -264,7 +264,7 @@ public class Cadastro extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {botaoCadastrar, botaoConsulta, botaoLimpar});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {botaoCadastrar, botaoLimpar, botaoListarClientes});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -272,6 +272,7 @@ public class Cadastro extends javax.swing.JFrame {
     private void botaoCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCadastrarActionPerformed
         
         cadastrar();
+        
         try {
             xml.salvarClientes(cliente);
             JOptionPane.showMessageDialog(null, "Cliente cadastrado.");
@@ -286,17 +287,20 @@ public class Cadastro extends javax.swing.JFrame {
         limparCampos();
     }//GEN-LAST:event_botaoLimparActionPerformed
 
-    private void botaoConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoConsultaActionPerformed
+    private void botaoListarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoListarClientesActionPerformed
+       
         try {
             xml.listarClientes(atual);
         } catch (FileNotFoundException x) {
             Logger.getLogger(Cadastro.class.getName()).log(Level.SEVERE, null, x);
         }
         
-    }//GEN-LAST:event_botaoConsultaActionPerformed
+    }//GEN-LAST:event_botaoListarClientesActionPerformed
 
     private void botaoVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoVoltarActionPerformed
         limparCampos();
+        
+        // Fecha a janela
         this.dispose();
     }//GEN-LAST:event_botaoVoltarActionPerformed
 
@@ -383,6 +387,7 @@ public class Cadastro extends javax.swing.JFrame {
     }
 //</editor-fold>
     
+    //<editor-fold defaultstate="collapsed" desc="dataAtual()">
     String dataAtual(){
         Date date = new Date();
         SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
@@ -391,6 +396,7 @@ public class Cadastro extends javax.swing.JFrame {
         s = s+" às "+f.format(date);
         return s;
     }
+//</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc="cadastrar()">
     void cadastrar(){
@@ -474,7 +480,7 @@ public class Cadastro extends javax.swing.JFrame {
         
         // SE NÃO HÁ NULOS QUER DIZER QUE A NOSSA MATRIZ ESTÁ CHEIA
         // E A ÚLTIMA POSIÇÃO É DE FATO A ÚLTIMA
-        if(!haNulos){
+        if(haNulos==false){
             ultimoCl = lista.length-1;
         }
         
@@ -484,6 +490,7 @@ public class Cadastro extends javax.swing.JFrame {
     
     //<editor-fold defaultstate="collapsed" desc="haClientes()">
     public boolean haClientes(){
+        //Lógico inversa
         return cliente[0]!=null;
     }
 //</editor-fold>
@@ -525,8 +532,8 @@ public class Cadastro extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bGrupoPlataforma;
     private javax.swing.JButton botaoCadastrar;
-    private javax.swing.JButton botaoConsulta;
     private javax.swing.JButton botaoLimpar;
+    private javax.swing.JButton botaoListarClientes;
     private javax.swing.JButton botaoVoltar;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblCidade;
