@@ -355,6 +355,7 @@ public class ConsultaIndividual extends javax.swing.JFrame {
         int ultimoCl = 0;
         boolean haNulos = false;
         
+        // VARRE O VETOR DE CLIENTES
         for (int i = 0; i < lista.length; i++) {
             // CHECA SE O CLIENTE DA POSIÇÃO I NÃO É NULO
             if(lista[i]==null){

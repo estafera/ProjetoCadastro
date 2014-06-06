@@ -16,7 +16,7 @@ public class EscolhaConsulta extends javax.swing.JFrame {
     Cliente[] cliente;
     String destino = "./src/arquivos/db/";
     XML xml = new XML(destino);
-    ConsultaIndividual ci;
+    ConsultaIndividual consultaIndividual;
     
     int posicao = -1;
     
@@ -327,8 +327,8 @@ public class EscolhaConsulta extends javax.swing.JFrame {
         }
         
         if(posicao>=0){
-            ci = new ConsultaIndividual(posicao);
-            ci.setVisible(true);
+            consultaIndividual = new ConsultaIndividual(posicao);
+            consultaIndividual.setVisible(true);
         } else {
             System.out.println("> Cliente não encontrado.");
             JOptionPane.showMessageDialog(null, "Cliente não encontrado.","Erro!", JOptionPane.ERROR_MESSAGE);

@@ -128,7 +128,6 @@ public class Cadastro extends javax.swing.JFrame {
         lblEmail.setText("Email:");
 
         botaoListarClientes.setText("Listar Clientes");
-        botaoListarClientes.setEnabled(false);
         botaoListarClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoListarClientesActionPerformed(evt);
@@ -468,6 +467,7 @@ public class Cadastro extends javax.swing.JFrame {
         int ultimoCl = 0;
         boolean haNulos = false;
         
+        // VARRE O VETOR DE CLIENTES
         for (int i = 0; i < lista.length; i++) {
             // CHECA SE O CLIENTE DA POSIÇÃO I NÃO É NULO
             if(lista[i]==null){
